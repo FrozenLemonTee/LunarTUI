@@ -56,7 +56,7 @@ pub fn Buffer::set_chars(self : Buffer, x : Int, y : Int, char : Char) -> Unit {
       "index out of bounds: index is expected from 0 to \{self.contents.length() - 1}, got \{idx}",
     )
   }
-  self.contents[idx].char = char
+  self.contents[idx].set(char)
 }
 
 ///|
