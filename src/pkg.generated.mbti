@@ -1,0 +1,78 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "FrozenLemonTee/tui-rabbit/src"
+
+// Values
+
+// Errors
+
+// Types and methods
+pub struct Area {
+  pos_x : Int
+  pos_y : Int
+  height : Int
+  width : Int
+}
+fn Area::default() -> Self // from trait `Default`
+fn Area::equal(Self, Self) -> Bool // from trait `Eq`
+fn Area::new(pos_x? : Int, pos_y? : Int, Int, Int) -> Self
+#deprecated
+fn Area::op_equal(Self, Self) -> Bool // from trait `Eq`
+impl Default for Area
+impl Eq for Area
+
+pub struct Buffer {
+  area : Area
+  contents : Array[Cell]
+}
+fn Buffer::default() -> Self // from trait `Default`
+fn Buffer::diff(Self, Self) -> Iter[((Int, Int), (Cell, Cell))]
+fn Buffer::equal(Self, Self) -> Bool // from trait `Eq`
+fn Buffer::get_index(Self, Int, Int) -> Int
+fn Buffer::get_pos(Self, Int) -> (Int, Int)
+fn Buffer::height(Self) -> Int
+fn Buffer::new(Area, Array[Cell]) -> Self
+#deprecated
+fn Buffer::op_equal(Self, Self) -> Bool // from trait `Eq`
+fn Buffer::set_chars(Self, Int, Int, Char) -> Unit
+fn Buffer::width(Self) -> Int
+impl Default for Buffer
+impl Eq for Buffer
+
+pub struct Cell {
+  mut char : Char
+}
+fn Cell::default() -> Self // from trait `Default`
+fn Cell::equal(Self, Self) -> Bool // from trait `Eq`
+#deprecated
+fn Cell::op_equal(Self, Self) -> Bool // from trait `Eq`
+impl Default for Cell
+impl Eq for Cell
+
+pub struct Frame {
+  buf : Buffer
+}
+fn Frame::area(Self) -> Area
+fn Frame::default() -> Self // from trait `Default`
+fn Frame::new(Buffer) -> Self
+fn[T : Widget] Frame::render(Self, T, Area) -> Unit
+impl Default for Frame
+
+pub struct Terminal {
+  mut last : Buffer
+  mut cur : Buffer
+}
+fn Terminal::clear() -> Unit
+fn Terminal::default() -> Self // from trait `Default`
+fn[T : Widget] Terminal::draw(Self, T) -> Unit
+fn Terminal::flush() -> Unit
+fn Terminal::move_cursor(Int, Int) -> Unit
+fn Terminal::put_char(Char) -> Unit
+impl Default for Terminal
+
+// Type aliases
+
+// Traits
+pub(open) trait Widget {
+  render(Self, Area, Buffer) -> Unit
+}
+
