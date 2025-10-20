@@ -1,1 +1,11 @@
-{}
+{
+    "supported-targets" : ["native"],
+    "link" : {
+        "native" : {
+            "cc": "clang"
+        }
+    },
+    "native-stub": [
+        "terminal.c"
+    ]
+}
