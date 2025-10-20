@@ -1,3 +1,8 @@
+///|
 pub struct Cell {
-  mut chars : String
-} derive(Default, Eq)
+  mut char : Char
+} derive(Eq)
+
+fn Cell::new(ch? : Char = '-') -> Cell {
+  Cell::{char : ch}
+}
