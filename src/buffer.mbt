@@ -6,7 +6,11 @@ pub struct Buffer {
 
 ///|
 pub fn Buffer::new(area : Area) -> Buffer {
-  Buffer::{ area, contents: Array::make(area.size(), Cell::new()) }
+  let contents = Array::default()
+  for i in 0..<area.size() {
+    contents.push(Cell::new())
+  }
+  Buffer::{ area, contents }
 }
 
 ///|
