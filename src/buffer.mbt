@@ -53,7 +53,7 @@ pub fn Buffer::set_chars(self : Buffer, x : Int, y : Int, char : Char) -> Unit {
   let idx = self.get_index(x, y)
   if idx >= self.contents.length() {
     abort(
-      "index out of bounds: index is expected from 0 to \{self.contents.length() - 1}, got \{idx}"
+      "index out of bounds: index is expected from 0 to \{self.contents.length() - 1}, got \{idx}",
     )
   }
   self.contents[idx].char = char

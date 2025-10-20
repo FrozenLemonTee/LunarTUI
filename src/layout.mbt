@@ -16,10 +16,12 @@ pub fn Area::new(
   Area::{ pos_x, pos_y, width, height }
 }
 
+///|
 pub fn Area::size(self : Area) -> Int {
   self.width * self.height
 }
 
+///|
 pub fn Area::pos(self : Area) -> (Int, Int) {
   (self.pos_x, self.pos_y)
 }

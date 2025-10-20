@@ -38,10 +38,7 @@ pub fn Terminal::flush() -> Unit {
 
 ///|
 pub fn Terminal::new(area : Area) -> Terminal {
-  Terminal::{
-    last: Buffer::new(area),
-    cur: Buffer::new(area),
-  }
+  Terminal::{ last: Buffer::new(area), cur: Buffer::new(area) }
 }
 
 ///|

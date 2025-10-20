@@ -1,3 +1,4 @@
+///|
 test "ffi test" {
   Terminal::clear()
   Terminal::move_cursor(0, 0)
@@ -8,6 +9,7 @@ test "ffi test" {
   Terminal::flush()
 }
 
+///|
 test "terminal test - init" {
     let area = Area::new(pos_x=0, pos_y=0, 20, 1)
     let ter = Terminal::new(area)
@@ -15,6 +17,7 @@ test "terminal test - init" {
     assert_eq(ter.last.contents.length(), area.size())
 }
 
+///|
 test "buffer init" {
   let area = Area::new(pos_x=0, pos_y=0, 4, 2)
   let buf = Buffer::new(area)
@@ -27,6 +30,7 @@ test "buffer init" {
   assert_eq(buf.get_index(3, 1), 7)
 }
 
+///|
 test "label test - render" {
     let area = Area::new(pos_x=0, pos_y=0, 40, 1)
     let ter = Terminal::new(area)
