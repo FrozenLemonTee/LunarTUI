@@ -4,5 +4,11 @@ pub struct Cell {
 } derive(Eq)
 
 ///|
+fn Cell::new(ch? : Char = ' ') -> Cell {
+  Cell::{ char: ch }
+}
+
 ///|
+fn Cell::set(self : Cell, ch : Char) -> Unit {
+  self.char = ch
 }
