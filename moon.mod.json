@@ -1,9 +1,11 @@
 {
-  "name": "FrozenLemonTee/tui_rabbit",
-  "version": "0.1.0",
+  "name": "FrozenLemonTee/tui-rabbit",
+  "version": "0.0.1",
   "readme": "README.md",
+  "deps": {},
   "repository": "https://github.com/FrozenLemonTee/tui-rabbit",
   "license": "Apache-2.0",
-  "keywords": [],
-  "description": "A package for cooking up terminal user interfaces (TUIs) written in language MoonBit"
+  "keywords": ["cli", "tui", "moonbit"],
+  "description": "A package for cooking up terminal user interfaces (TUIs) written in language MoonBit",
+  "preferred-target": "native"
 }
