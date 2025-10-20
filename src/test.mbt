@@ -23,7 +23,7 @@ test "buffer init" {
   let buf = Buffer::new(area)
   assert_eq(buf.contents.length(), 8)
   for i in 0..<8 {
-    assert_eq(buf.contents[i].char, '-')
+    assert_eq(buf.contents[i].char, ' ')
   }
   assert_eq(buf.height(), 2)
   assert_eq(buf.width(), 4)
@@ -32,10 +32,10 @@ test "buffer init" {
 
 ///|
 test "label test - render" {
-    let area = Area::new(pos_x=0, pos_y=0, 40, 1)
+  let area = Area::new(pos_x=0, pos_y=0, 40, 5)
     let ter = Terminal::new(area)
-    let label = Label::new("Hello tui-rabbit!")
-    terminal_clear()
+  let label = Label::new("Hello, tui-rabbit!", x=10, y=3)
+  Terminal::clear()
     ter.draw(label)
-    println("\n--End Print-")
+  println("")
 }
