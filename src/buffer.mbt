@@ -1,20 +1,25 @@
+///|
 pub struct Buffer {
   area : Area
   contents : Array[Cell]
-} derive(Default, Eq)
+} derive(Eq)
 
-pub fn Buffer::new(area : Area, contents : Array[Cell]) -> Buffer {
-  Buffer::{ area, contents }
+///|
+pub fn Buffer::new(area : Area) -> Buffer {
+  Buffer::{ area, contents: Array::make(area.size(), Cell::new()) }
 }
 
+///|
 pub fn Buffer::height(self : Buffer) -> Int {
   self.area.height
 }
 
+///|
 pub fn Buffer::width(self : Buffer) -> Int {
   self.area.width
 }
 
+///|
 pub fn Buffer::get_index(self : Buffer, x : Int, y : Int) -> Int {
   let height = self.height()
   let width = self.width()
@@ -31,6 +36,7 @@ pub fn Buffer::get_index(self : Buffer, x : Int, y : Int) -> Int {
   y * width + x
 }
 
+///|
 pub fn Buffer::get_pos(self : Buffer, index : Int) -> (Int, Int) {
   let height = self.height()
   let width = self.width()
@@ -42,16 +48,18 @@ pub fn Buffer::get_pos(self : Buffer, index : Int) -> (Int, Int) {
   (index % width, index / width)
 }
 
-pub fn Buffer::set_chars(
-  self : Buffer,
-  x : Int,
-  y : Int,
-  chars : String,
-) -> Unit {
+///|
+pub fn Buffer::set_chars(self : Buffer, x : Int, y : Int, char : Char) -> Unit {
   let idx = self.get_index(x, y)
-  self.contents[idx].chars = chars
+  if idx >= self.contents.length() {
+    abort(
+      "index out of bounds: index is expected from 0 to \{self.contents.length() - 1}, got \{idx}"
+    )
+  }
+  self.contents[idx].char = char
 }
 
+///|
 pub fn Buffer::diff(
   self : Buffer,
   other : Buffer,
