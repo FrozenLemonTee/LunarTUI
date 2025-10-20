@@ -11,10 +11,10 @@ test "ffi test" {
 
 ///|
 test "terminal test - init" {
-    let area = Area::new(pos_x=0, pos_y=0, 20, 1)
-    let ter = Terminal::new(area)
-    assert_eq(ter.cur.contents.length(), area.size())
-    assert_eq(ter.last.contents.length(), area.size())
+  let area = Area::new(pos_x=0, pos_y=0, 20, 1)
+  let ter = Terminal::new(area)
+  assert_eq(ter.cur.contents.length(), area.size())
+  assert_eq(ter.last.contents.length(), area.size())
 }
 
 ///|
@@ -33,9 +33,9 @@ test "buffer init" {
 ///|
 test "label test - render" {
   let area = Area::new(pos_x=0, pos_y=0, 40, 5)
-    let ter = Terminal::new(area)
+  let ter = Terminal::new(area)
   let label = Label::new("Hello, tui-rabbit!", x=10, y=3)
   Terminal::clear()
-    ter.draw(label)
+  ter.draw(label)
   println("")
 }
