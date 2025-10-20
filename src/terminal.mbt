@@ -45,6 +45,7 @@ pub fn Terminal::new(area : Area) -> Terminal {
 pub fn[T : Widget] Terminal::draw(self : Terminal, widget : T) -> Unit {
   let frame = Frame::new(self.cur)
   widget.render(frame)
+  self.cur = frame.buf
   self.apply()
   self.swap()
 }
@@ -61,7 +62,7 @@ fn apply(self : Terminal) -> Unit {
   let diff = self.cur.diff(self.last)
   for item in diff {
     let (x, y) = item.0
-    let (_, new) = item.1
+    let (new, _) = item.1
     terminal_move_cursor(x, y)
     terminal_put_char(new.char)
   }
