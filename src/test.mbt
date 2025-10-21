@@ -40,6 +40,7 @@ test "label test - render" {
   println("")
 }
 
+///|
 test "block test - simple render" {
   let a1 = Area::new(50, 50)
   let ter = Terminal::new(a1)
@@ -50,10 +51,18 @@ test "block test - simple render" {
   println("")
 }
 
+///|
 test "block test - nested block render" {
   let a1 = Area::new(70, 30)
   let ter = Terminal::new(a1)
-  let b1 = Block::new(0, 0, 70, 30, title="This is a block", child=Label::new("A nested label", x=30, y=2))
+  let b1 = Block::new(
+    0,
+    0,
+    70,
+    30,
+    title="This is a block",
+    child=Label::new("A nested label", x=30, y=2),
+  )
   let b2 = Block::new(5, 5, 25, 20, title="This is a nested block")
   b1.add(b2)
   Terminal::clear()
