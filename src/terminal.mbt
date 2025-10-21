@@ -43,7 +43,10 @@ pub fn Terminal::new(area : Area) -> Terminal {
 
 ///|
 pub fn[T : Widget] Terminal::draw(self : Terminal, widget : T) -> Unit {
-  let frame = Frame::new(self.cur, Section::new(Area::new(self.cur.width(), self.cur.height()), 0, 0))
+  let frame = Frame::new(
+    self.cur,
+    Section::new(Area::new(self.cur.width(), self.cur.height()), 0, 0),
+  )
   widget.render(frame)
   self.cur = frame.buf
   self.apply()

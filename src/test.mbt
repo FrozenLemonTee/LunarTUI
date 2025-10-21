@@ -70,11 +70,19 @@ test "block test - nested block render" {
   println("")
 }
 
+///|
 test "block test - nested label in nested block" {
   let area = Area::new(30, 30)
   let ter = Terminal::new(area)
   let b1 = Block::new(0, 0, 30, 30, title="Outer Block")
-  let b2 = Block::new(5, 5, 20, 10, title="Inner Block", child=Label::new("Nested Label", x=3, y=2))  
+  let b2 = Block::new(
+    5,
+    5,
+    20,
+    10,
+    title="Inner Block",
+    child=Label::new("Nested Label", x=3, y=2),
+  )
   b1.add(b2)
   Terminal::clear()
   ter.draw(b1)
