@@ -8,6 +8,7 @@ void terminal_move_cursor(int32_t x, int32_t y) {
 
 void terminal_clear() {
     printf("\033[2J");
+    printf("\033[H"); 
 }
 
 void terminal_put_char(char c) {
