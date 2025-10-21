@@ -11,7 +11,7 @@ test "ffi test" {
 
 ///|
 test "terminal test - init" {
-  let area = Area::new(pos_x=0, pos_y=0, 20, 1)
+  let area = Area::new(20, 1)
   let ter = Terminal::new(area)
   assert_eq(ter.cur.contents.length(), area.size())
   assert_eq(ter.last.contents.length(), area.size())
@@ -19,7 +19,7 @@ test "terminal test - init" {
 
 ///|
 test "buffer init" {
-  let area = Area::new(pos_x=0, pos_y=0, 4, 2)
+  let area = Area::new(4, 2)
   let buf = Buffer::new(area)
   assert_eq(buf.contents.length(), 8)
   for i in 0..<8 {
@@ -32,7 +32,7 @@ test "buffer init" {
 
 ///|
 test "label test - render" {
-  let area = Area::new(pos_x=0, pos_y=0, 40, 5)
+  let area = Area::new(40, 5)
   let ter = Terminal::new(area)
   let label = Label::new("Hello, tui-rabbit!", x=10, y=3)
   Terminal::clear()
@@ -63,7 +63,18 @@ test "block test - nested block render" {
     title="This is a block",
     child=Label::new("A nested label", x=30, y=2),
   )
-  let b2 = Block::new(5, 5, 25, 20, title="This is a nested block")
+  let b2 = Block::new(5, 5, 25, 10, title="This is a nested block")
+  b1.add(b2)
+  Terminal::clear()
+  ter.draw(b1)
+  println("")
+}
+
+test "block test - nested label in nested block" {
+  let area = Area::new(30, 30)
+  let ter = Terminal::new(area)
+  let b1 = Block::new(0, 0, 30, 30, title="Outer Block")
+  let b2 = Block::new(5, 5, 20, 10, title="Inner Block", child=Label::new("Nested Label", x=3, y=2))  
   b1.add(b2)
   Terminal::clear()
   ter.draw(b1)
