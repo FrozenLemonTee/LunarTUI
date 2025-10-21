@@ -39,3 +39,24 @@ test "label test - render" {
   ter.draw(label)
   println("")
 }
+
+test "block test - simple render" {
+  let a1 = Area::new(50, 50)
+  let ter = Terminal::new(a1)
+  let l1 = Label::new("This is a label", x=5, y=5)
+  let b1 = Block::new(0, 0, 50, 50, title="This is a block", child=l1)
+  Terminal::clear()
+  ter.draw(b1)
+  println("")
+}
+
+test "block test - nested block render" {
+  let a1 = Area::new(70, 30)
+  let ter = Terminal::new(a1)
+  let b1 = Block::new(0, 0, 70, 30, title="This is a block", child=Label::new("A nested label", x=30, y=2))
+  let b2 = Block::new(5, 5, 25, 20, title="This is a nested block")
+  b1.add(b2)
+  Terminal::clear()
+  ter.draw(b1)
+  println("")
+}
