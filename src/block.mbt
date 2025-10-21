@@ -36,43 +36,23 @@ pub fn Block::add(self : Block, child : &Widget) -> Unit {
 
 ///|
 pub impl Widget for Block with render(self : Block, frame : Frame) -> Unit {
-  let pos = frame.buf.area.pos()
+  let subframe = frame.subframe(self.pos_x, self.pos_y, self.width, self.height)
   for i in 0..<self.width {
-    frame.buf.set_chars(pos.0 + self.pos_x + i, pos.1 + self.pos_y, '-')
-    frame.buf.set_chars(
-      pos.0 + self.pos_x + i,
-      pos.1 + self.pos_y + self.height - 1,
-      '-',
-    )
+    subframe.set_chars(i, 0, '-')
+    subframe.set_chars(i, self.height - 1, '-')
   }
   for j in 0..<self.height {
-    frame.buf.set_chars(pos.0 + self.pos_x, pos.1 + self.pos_y + j, '|')
-    frame.buf.set_chars(
-      pos.0 + self.pos_x + self.width - 1,
-      pos.1 + self.pos_y + j,
-      '|',
-    )
+    subframe.set_chars(0, j, '|')
+    subframe.set_chars(self.width - 1, j, '|')
   }
-  frame.buf.set_chars(pos.0 + self.pos_x, pos.1 + self.pos_y, '+')
-  frame.buf.set_chars(
-    pos.0 + self.pos_x + self.width - 1,
-    pos.1 + self.pos_y,
-    '+',
-  )
-  frame.buf.set_chars(
-    pos.0 + self.pos_x,
-    pos.1 + self.pos_y + self.height - 1,
-    '+',
-  )
-  frame.buf.set_chars(
-    pos.0 + self.pos_x + self.width - 1,
-    pos.1 + self.pos_y + self.height - 1,
-    '+',
-  )
+  subframe.set_chars(0, 0, '+')
+  subframe.set_chars(self.width - 1, 0, '+')
+  subframe.set_chars(0, self.height - 1, '+')
+  subframe.set_chars(self.width - 1, self.height - 1, '+')
   for i, ch in self.title.iter2() {
-    frame.buf.set_chars(pos.0 + self.pos_x + 2 + i, pos.1 + self.pos_y, ch)
+    subframe.set_chars(2 + i, 0, ch)
   }
   for child in self.children {
-    child.render(frame)
+    child.render(subframe)
   }
 }

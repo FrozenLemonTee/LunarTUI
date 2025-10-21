@@ -12,8 +12,8 @@ pub fn Label::new(text : String, x? : Int = 0, y? : Int = 0) -> Label {
 
 ///|
 pub impl Widget for Label with render(self : Label, frame : Frame) -> Unit {
-  let pos = frame.buf.area.pos()
+  let subframe = frame.subframe(self.pos_x, self.pos_y, self.text.length(), 1)
   for i, ch in self.text.iter2() {
-    frame.buf.set_chars(pos.0 + self.pos_x + i, pos.1 + self.pos_y, ch)
+    subframe.set_chars(i, 0, ch)
   }
 }
