@@ -6,6 +6,7 @@ pub struct Block {
   width : Int
   height : Int
   children : Array[&Widget]
+  layout : Option[&Layout]
 }
 
 ///|
@@ -16,11 +17,12 @@ pub fn Block::new(
   height : Int,
   title? : String = "",
   child? : &Widget,
+  layout? : &Layout
 ) -> Block {
   match child {
-    None => Block::{ title, pos_x: x, pos_y: y, width, height, children: [] }
+    None => Block::{ title, pos_x: x, pos_y: y, width, height, children: [], layout }
     Some(widget) =>
-      Block::{ title, pos_x: x, pos_y: y, width, height, children: [widget] }
+      Block::{ title, pos_x: x, pos_y: y, width, height, children: [widget], layout }
   }
 }
 
@@ -70,8 +72,22 @@ pub fn Block::draw_title(self : Block, frame : Frame) -> Unit {
 
 ///|
 pub fn Block::draw_children(self : Block, frame : Frame) -> Unit {
-  for child in self.children {
-    child.render(frame)
+  guard self.children.length() > 0 else { return }
+
+  match self.layout {
+    None => {
+      for child in self.children {
+        child.render(frame)
+      }
+    }
+    Some(layout) => {
+      let sections = layout.split(Area::new(self.width, self.height), self.children)
+      for i, child in self.children.iter2() {
+        let sec = sections[i]
+        let subframe = frame.subframe(sec.x, sec.y, sec.area.width, sec.area.height)
+        child.render(subframe)
+      }
+    }
   }
 }
 
