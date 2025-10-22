@@ -17,11 +17,11 @@ pub fn Area::size(self : Area) -> Int {
 ///|
 pub struct Section {
   area : Area
-  x : Int
-  y : Int
+  left : Int
+  top : Int
 } derive(Eq)
 
 ///|
-pub fn Section::new(area : Area, x : Int, y : Int) -> Section {
-  Section::{ area, x, y }
+pub fn Section::new(area : Area, left : Int, top : Int) -> Section {
+  Section::{ area, left, top }
 }

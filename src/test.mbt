@@ -34,7 +34,7 @@ test "buffer init" {
 test "label test - render" {
   let area = Area::new(40, 5)
   let ter = Terminal::new(area)
-  let label = Label::new("Hello, tui-rabbit!", x=10, y=3)
+  let label = Label::new("Hello, tui-rabbit!", left=10, top=3)
   Terminal::clear()
   ter.draw(label)
   println("")
@@ -44,7 +44,7 @@ test "label test - render" {
 test "block test - simple render" {
   let a1 = Area::new(50, 50)
   let ter = Terminal::new(a1)
-  let l1 = Label::new("This is a label", x=5, y=5)
+  let l1 = Label::new("This is a label", left=5, top=5)
   let b1 = Block::new(0, 0, 50, 50, title="This is a block", child=l1)
   Terminal::clear()
   ter.draw(b1)
@@ -61,7 +61,7 @@ test "block test - nested block render" {
     70,
     30,
     title="This is a block",
-    child=Label::new("A nested label", x=30, y=2),
+    child=Label::new("A nested label", left=30, top=2),
   )
   let b2 = Block::new(5, 5, 25, 10, title="This is a nested block")
   b1.add(b2)
@@ -81,7 +81,7 @@ test "block test - nested label in nested block" {
     20,
     10,
     title="Inner Block",
-    child=Label::new("Nested Label", x=3, y=2),
+    child=Label::new("Nested Label", left=3, top=2),
   )
   b1.add(b2)
   Terminal::clear()
@@ -89,12 +89,13 @@ test "block test - nested label in nested block" {
   println("")
 }
 
+///|
 test "layout test - HLayout render labels in block" {
   let area = Area::new(40, 20)
   let ter = Terminal::new(area)
   let labels : Array[&Widget] = Array::default()
   for i in 0..<5 {
-    labels.push(Label::new("\{i}", x=0, y=0))
+    labels.push(Label::new("\{i}", left=0, top=0))
   }
   let block = Block::new(0, 0, area.width, area.height, layout=HLayout::new())
   block.add_all(labels)
@@ -103,12 +104,20 @@ test "layout test - HLayout render labels in block" {
   println("")
 }
 
+///|
 test "layout test - HLayout render blocks in block" {
   let area = Area::new(60, 10)
   let ter = Terminal::new(area)
   let blocks : Array[&Widget] = Array::default()
   for i in 0..<3 {
-    let b = Block::new(0, 0, 15, 5, title="Block \{i}", child=Label::new("Content", x=2, y=2))
+    let b = Block::new(
+      0,
+      0,
+      15,
+      5,
+      title="Block \{i}",
+      child=Label::new("Content", left=2, top=2),
+    )
     blocks.push(b)
   }
   let block = Block::new(0, 0, area.width, area.height, layout=HLayout::new())

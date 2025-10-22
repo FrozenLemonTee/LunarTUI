@@ -6,16 +6,16 @@ pub struct Frame {
 
 ///|
 pub fn Frame::new(buf : Buffer, section : Section) -> Frame {
-  let (x0, y0) = (
-    @cmp.minimum(section.x, buf.area.width),
-    @cmp.minimum(section.y, buf.area.height),
+  let (left, top) = (
+    @cmp.minimum(section.left, buf.area.width),
+    @cmp.minimum(section.top, buf.area.height),
   )
-  let (x1, y1) = (
-    @cmp.minimum(x0 + section.area.width, buf.area.width),
-    @cmp.minimum(y0 + section.area.height, buf.area.height),
+  let (right, bottom) = (
+    @cmp.minimum(left + section.area.width, buf.area.width),
+    @cmp.minimum(top + section.area.height, buf.area.height),
   )
-  let (width, height) = (x1 - x0, y1 - y0)
-  Frame::{ buf, section: Section::new(Area::new(width, height), x0, y0) }
+  let (width, height) = (right - left, bottom - top)
+  Frame::{ buf, section: Section::new(Area::new(width, height), left, top) }
 }
 
 ///|
@@ -26,26 +26,26 @@ pub fn Frame::area(self : Frame) -> Area {
 ///|
 pub fn Frame::set_chars(
   self : Frame,
-  offset_x : Int,
-  offset_y : Int,
+  left : Int,
+  top : Int,
   ch : Char,
 ) -> Unit {
-  if offset_x < 0 || offset_x >= self.section.area.width {
+  if left < 0 || left >= self.section.area.width {
     return
   }
-  if offset_y < 0 || offset_y >= self.section.area.height {
+  if top < 0 || top >= self.section.area.height {
     return
   }
-  let buf_x = offset_x + self.section.x
-  let buf_y = offset_y + self.section.y
+  let buf_x = left + self.section.left
+  let buf_y = top + self.section.top
   self.buf.set_chars(buf_x, buf_y, ch)
 }
 
 ///|
 pub fn Frame::subframe(
   self : Frame,
-  offset_x : Int,
-  offset_y : Int,
+  left : Int,
+  top : Int,
   width : Int,
   height : Int,
 ) -> Frame {
@@ -53,8 +53,8 @@ pub fn Frame::subframe(
     self.buf,
     Section::new(
       Area::new(width, height),
-      offset_x + self.section.x,
-      offset_y + self.section.y,
+      left + self.section.left,
+      top + self.section.top,
     ),
   )
 }

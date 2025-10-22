@@ -1,28 +1,37 @@
 ///|
 pub struct Block {
   mut title : String
-  pos_x : Int
-  pos_y : Int
+  left : Int
+  top : Int
   width : Int
   height : Int
   children : Array[&Widget]
-  layout : Option[&Layout]
+  layout : &Layout?
 }
 
 ///|
 pub fn Block::new(
-  x : Int,
-  y : Int,
+  left : Int,
+  top : Int,
   width : Int,
   height : Int,
   title? : String = "",
   child? : &Widget,
-  layout? : &Layout
+  layout? : &Layout,
 ) -> Block {
   match child {
-    None => Block::{ title, pos_x: x, pos_y: y, width, height, children: [], layout }
+    None =>
+      Block::{ title, left, top, width, height, children: [], layout }
     Some(widget) =>
-      Block::{ title, pos_x: x, pos_y: y, width, height, children: [widget], layout }
+      Block::{
+        title,
+        left,
+        top,
+        width,
+        height,
+        children: [widget],
+        layout,
+      }
   }
 }
 
@@ -73,18 +82,24 @@ pub fn Block::draw_title(self : Block, frame : Frame) -> Unit {
 ///|
 pub fn Block::draw_children(self : Block, frame : Frame) -> Unit {
   guard self.children.length() > 0 else { return }
-
   match self.layout {
-    None => {
+    None =>
       for child in self.children {
         child.render(frame)
       }
-    }
     Some(layout) => {
-      let sections = layout.split(Area::new(self.width, self.height), self.children)
+      let sections = layout.split(
+        Area::new(self.width, self.height),
+        self.children,
+      )
       for i, child in self.children.iter2() {
         let sec = sections[i]
-        let subframe = frame.subframe(sec.x, sec.y, sec.area.width, sec.area.height)
+        let subframe = frame.subframe(
+          sec.left,
+          sec.top,
+          sec.area.width,
+          sec.area.height,
+        )
         child.render(subframe)
       }
     }
@@ -93,7 +108,7 @@ pub fn Block::draw_children(self : Block, frame : Frame) -> Unit {
 
 ///|
 pub impl Widget for Block with render(self : Block, frame : Frame) -> Unit {
-  let subframe = frame.subframe(self.pos_x, self.pos_y, self.width, self.height)
+  let subframe = frame.subframe(self.left, self.top, self.width, self.height)
   self.draw_border(subframe)
   self.draw_title(subframe)
   self.draw_children(subframe)
