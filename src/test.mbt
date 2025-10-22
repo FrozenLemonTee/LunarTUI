@@ -88,3 +88,32 @@ test "block test - nested label in nested block" {
   ter.draw(b1)
   println("")
 }
+
+test "layout test - HLayout render labels in block" {
+  let area = Area::new(40, 20)
+  let ter = Terminal::new(area)
+  let labels : Array[&Widget] = Array::default()
+  for i in 0..<5 {
+    labels.push(Label::new("\{i}", x=0, y=0))
+  }
+  let block = Block::new(0, 0, area.width, area.height, layout=HLayout::new())
+  block.add_all(labels)
+  Terminal::clear()
+  ter.draw(block)
+  println("")
+}
+
+test "layout test - HLayout render blocks in block" {
+  let area = Area::new(60, 10)
+  let ter = Terminal::new(area)
+  let blocks : Array[&Widget] = Array::default()
+  for i in 0..<3 {
+    let b = Block::new(0, 0, 15, 5, title="Block \{i}", child=Label::new("Content", x=2, y=2))
+    blocks.push(b)
+  }
+  let block = Block::new(0, 0, area.width, area.height, layout=HLayout::new())
+  block.add_all(blocks)
+  Terminal::clear()
+  ter.draw(block)
+  println("")
+}
