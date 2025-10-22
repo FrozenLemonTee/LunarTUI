@@ -20,18 +20,9 @@ pub fn Block::new(
   layout? : &Layout,
 ) -> Block {
   match child {
-    None =>
-      Block::{ title, left, top, width, height, children: [], layout }
+    None => Block::{ title, left, top, width, height, children: [], layout }
     Some(widget) =>
-      Block::{
-        title,
-        left,
-        top,
-        width,
-        height,
-        children: [widget],
-        layout,
-      }
+      Block::{ title, left, top, width, height, children: [widget], layout }
   }
 }
 

@@ -24,12 +24,7 @@ pub fn Frame::area(self : Frame) -> Area {
 }
 
 ///|
-pub fn Frame::set_chars(
-  self : Frame,
-  left : Int,
-  top : Int,
-  ch : Char,
-) -> Unit {
+pub fn Frame::set_chars(self : Frame, left : Int, top : Int, ch : Char) -> Unit {
   if left < 0 || left >= self.section.area.width {
     return
   }
