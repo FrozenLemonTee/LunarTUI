@@ -97,7 +97,14 @@ test "layout test - HLayout render labels in block" {
   for i in 0..<5 {
     labels.push(Label::new("\{i}", left=0, top=0))
   }
-  let block = Block::new(0, 0, area.width, area.height, layout=HLayout::new())
+  let block = Block::new(
+    0,
+    0,
+    title="Outer Block",
+    area.width,
+    area.height,
+    layout=HLayout::new(),
+  )
   block.add_all(labels)
   Terminal::clear()
   ter.draw(block)
@@ -120,7 +127,14 @@ test "layout test - HLayout render blocks in block" {
     )
     blocks.push(b)
   }
-  let block = Block::new(0, 0, area.width, area.height, layout=HLayout::new())
+  let block = Block::new(
+    0,
+    0,
+    title="Outer Block",
+    area.width,
+    area.height,
+    layout=HLayout::new(),
+  )
   block.add_all(blocks)
   Terminal::clear()
   ter.draw(block)
