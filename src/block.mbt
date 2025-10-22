@@ -35,24 +35,50 @@ pub fn Block::add(self : Block, child : &Widget) -> Unit {
 }
 
 ///|
-pub impl Widget for Block with render(self : Block, frame : Frame) -> Unit {
-  let subframe = frame.subframe(self.pos_x, self.pos_y, self.width, self.height)
+pub fn Block::add_all(self : Block, children : Array[&Widget]) -> Unit {
+  self.children.append(children)
+}
+
+///|
+pub fn Block::draw_border(
+  self : Block,
+  frame : Frame,
+  hor? : Char = '-',
+  ver? : Char = '|',
+  edge? : Char = '+',
+) -> Unit {
   for i in 0..<self.width {
-    subframe.set_chars(i, 0, '-')
-    subframe.set_chars(i, self.height - 1, '-')
+    frame.set_chars(i, 0, hor)
+    frame.set_chars(i, self.height - 1, hor)
   }
   for j in 0..<self.height {
-    subframe.set_chars(0, j, '|')
-    subframe.set_chars(self.width - 1, j, '|')
+    frame.set_chars(0, j, ver)
+    frame.set_chars(self.width - 1, j, ver)
   }
-  subframe.set_chars(0, 0, '+')
-  subframe.set_chars(self.width - 1, 0, '+')
-  subframe.set_chars(0, self.height - 1, '+')
-  subframe.set_chars(self.width - 1, self.height - 1, '+')
+  frame.set_chars(0, 0, edge)
+  frame.set_chars(self.width - 1, 0, edge)
+  frame.set_chars(0, self.height - 1, edge)
+  frame.set_chars(self.width - 1, self.height - 1, edge)
+}
+
+///|
+pub fn Block::draw_title(self : Block, frame : Frame) -> Unit {
   for i, ch in self.title.iter2() {
-    subframe.set_chars(2 + i, 0, ch)
+    frame.set_chars(2 + i, 0, ch)
   }
+}
+
+///|
+pub fn Block::draw_children(self : Block, frame : Frame) -> Unit {
   for child in self.children {
-    child.render(subframe)
+    child.render(frame)
   }
+}
+
+///|
+pub impl Widget for Block with render(self : Block, frame : Frame) -> Unit {
+  let subframe = frame.subframe(self.pos_x, self.pos_y, self.width, self.height)
+  self.draw_border(subframe)
+  self.draw_title(subframe)
+  self.draw_children(subframe)
 }
