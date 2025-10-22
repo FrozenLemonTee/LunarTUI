@@ -1,4 +1,4 @@
 ///|
 pub(open) trait Widget {
-  render(Self, Frame) -> Unit
+  render(self : Self, frame : Frame) -> Unit
 }
