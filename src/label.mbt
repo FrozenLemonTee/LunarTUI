@@ -9,11 +9,16 @@ pub struct Label {
 pub fn Label::new(text : String, left? : Int = 0, top? : Int = 0) -> Label {
   Label::{ text, left, top }
 }
+
+///|
+pub impl Widget for Label with width(self : Label) -> Int {
+  self.text.length()
 }
 
 ///|
-pub fn Label::new(text : String, x? : Int = 0, y? : Int = 0) -> Label {
-  Label::{ text, pos_x: x, pos_y: y }
+pub impl Widget for Label with height(self : Label) -> Int {
+  ignore(self) // NOLINT
+  1
 }
 
 ///|

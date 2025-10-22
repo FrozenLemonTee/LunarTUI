@@ -107,6 +107,16 @@ pub fn Block::draw_children(self : Block, frame : Frame) -> Unit {
 }
 
 ///|
+pub impl Widget for Block with width(self : Block) -> Int {
+  self.width
+}
+
+///|
+pub impl Widget for Block with height(self : Block) -> Int {
+  self.height
+}
+
+///|
 pub impl Widget for Block with render(self : Block, frame : Frame) -> Unit {
   let subframe = frame.subframe(self.left, self.top, self.width, self.height)
   self.draw_border(subframe)
