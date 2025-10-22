@@ -140,3 +140,25 @@ test "layout test - HLayout render blocks in block" {
   ter.draw(block)
   println("")
 }
+
+///|
+test "layout test - VLayout render labels in block" {
+  let area = Area::new(20, 20)
+  let ter = Terminal::new(area)
+  let labels : Array[&Widget] = Array::default()
+  for i in 0..<5 {
+    labels.push(Label::new("Label \{i}", left=0, top=0))
+  }
+  let block = Block::new(
+    0,
+    0,
+    title="Outer Block",
+    area.width,
+    area.height,
+    layout=VLayout::new(),
+  )
+  block.add_all(labels)
+  Terminal::clear()
+  ter.draw(block)
+  println("")
+}
