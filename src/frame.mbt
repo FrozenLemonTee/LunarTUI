@@ -30,7 +30,15 @@ pub fn Frame::set_chars(
   offset_y : Int,
   ch : Char,
 ) -> Unit {
-  self.buf.set_chars(offset_x + self.section.x, offset_y + self.section.y, ch)
+  if offset_x < 0 || offset_x >= self.section.area.width {
+    return
+  }
+  if offset_y < 0 || offset_y >= self.section.area.height {
+    return
+  }
+  let buf_x = offset_x + self.section.x
+  let buf_y = offset_y + self.section.y
+  self.buf.set_chars(buf_x, buf_y, ch)
 }
 
 ///|
