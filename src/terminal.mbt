@@ -74,8 +74,8 @@ fn apply(self : Terminal) -> Unit {
   for item in diff {
     let (x, y) = item.0
     let (new, _) = item.1
-    terminal_move_cursor(x, y)
-    terminal_put_char(new.char)
+    Terminal::move_cursor(x, y)
+    Terminal::put_char(new.char)
   }
-  terminal_flush()
+  Terminal::flush()
 }
