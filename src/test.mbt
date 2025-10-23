@@ -163,6 +163,7 @@ test "layout test - VLayout render labels in block" {
   println("")
 }
 
+///|
 test "layout test - GridLayout render labels in block" {
   let area = Area::new(40, 20)
   let ter = Terminal::new(area)
@@ -184,6 +185,7 @@ test "layout test - GridLayout render labels in block" {
   println("")
 }
 
+///|
 test "layout test - GridLayout render blocks in block" {
   let area = Area::new(40, 20)
   let ter = Terminal::new(area)
@@ -210,5 +212,153 @@ test "layout test - GridLayout render blocks in block" {
   block.add_all(blocks)
   Terminal::clear()
   ter.draw(block)
-  println("")
+  Terminal::newline()
+}
+
+///|
+test "layout test - FlexLayout render adjust mode" {
+  let blocks : Array[&Widget] = []
+  for i in 0..<3 {
+    let b = Block::new(
+      0,
+      0,
+      10,
+      3,
+      title="B\{i}",
+      child=Label::new("Blk\{i}", left=2, top=1),
+    )
+    blocks.push(b)
+  }
+  let area = Area::new(60, 40)
+  let ter = Terminal::new(area)
+  let outer = Block::new(
+    0,
+    0,
+    area.width,
+    area.height,
+    title="FlexLayout Test",
+    layout=VLayout::new(),
+  )
+  let block_start = Block::new(
+    0,
+    0,
+    title="Main axis: Start",
+    55,
+    5,
+    layout=FlexLayout::new(direction=Row, justify=Start, align=Center),
+  )
+  block_start.add_all(blocks)
+  let block_center = Block::new(
+    0,
+    0,
+    title="Main axis: Center",
+    55,
+    5,
+    layout=FlexLayout::new(direction=Row, justify=Center, align=Center),
+  )
+  block_center.add_all(blocks)
+  let block_end = Block::new(
+    0,
+    0,
+    title="Main axis: End",
+    55,
+    5,
+    layout=FlexLayout::new(direction=Row, justify=End, align=Center),
+  )
+  block_end.add_all(blocks)
+  let block_space_between = Block::new(
+    0,
+    0,
+    title="Main axis: SpaceBetween",
+    55,
+    5,
+    layout=FlexLayout::new(direction=Row, justify=SpaceBetween, align=Center),
+  )
+  block_space_between.add_all(blocks)
+  let block_space_around = Block::new(
+    0,
+    0,
+    title="Main axis: SpaceAround",
+    55,
+    5,
+    layout=FlexLayout::new(direction=Row, justify=SpaceAround, align=Center),
+  )
+  block_space_around.add_all(blocks)
+  let block_space_evenly = Block::new(
+    0,
+    0,
+    title="Main axis: SpaceEvenly",
+    55,
+    5,
+    layout=FlexLayout::new(direction=Row, justify=SpaceEvenly, align=Center),
+  )
+  block_space_evenly.add_all(blocks)
+  outer.add(block_start)
+  outer.add(block_center)
+  outer.add(block_end)
+  outer.add(block_space_between)
+  outer.add(block_space_around)
+  outer.add(block_space_evenly)
+  Terminal::clear()
+  ter.draw(outer)
+  Terminal::newline()
+}
+
+///|
+test "layout test - FlexLayout render align mode" {
+  let blocks : Array[&Widget] = []
+  for i in 0..<3 {
+    let b = Block::new(
+      0,
+      0,
+      10,
+      3,
+      title="B\{i}",
+      child=Label::new("Blk\{i}", left=2, top=1),
+    )
+    blocks.push(b)
+  }
+  let area = Area::new(60, 30)
+  let ter = Terminal::new(area)
+  let outer = Block::new(
+    0,
+    0,
+    area.width,
+    area.height,
+    title="FlexLayout Align Test",
+    layout=VLayout::new(),
+  )
+  let block_align_start = Block::new(
+    0,
+    0,
+    title="Cross axis: Start",
+    55,
+    7,
+    layout=FlexLayout::new(direction=Row, justify=Center, align=Start),
+  )
+  block_align_start.add_all(blocks)
+  let block_align_center = Block::new(
+    0,
+    0,
+    title="Cross axis: Center",
+    55,
+    7,
+    layout=FlexLayout::new(direction=Row, justify=Center, align=Center),
+  )
+  block_align_center.add_all(blocks)
+  let block_align_end = Block::new(
+    0,
+    0,
+    title="Cross axis: End",
+    55,
+    7,
+    layout=FlexLayout::new(direction=Row, justify=Center, align=End),
+  )
+  block_align_end.add_all(blocks)
+  outer.add(block_align_start)
+  outer.add(block_align_center)
+  outer.add(block_align_end)
+  Terminal::clear()
+  ter.draw(outer)
+  Terminal::newline()
 }
