@@ -162,3 +162,53 @@ test "layout test - VLayout render labels in block" {
   ter.draw(block)
   println("")
 }
+
+test "layout test - GridLayout render labels in block" {
+  let area = Area::new(40, 20)
+  let ter = Terminal::new(area)
+  let labels : Array[&Widget] = Array::default()
+  for i in 0..<9 {
+    labels.push(Label::new("L\{i}", left=0, top=0))
+  }
+  let block = Block::new(
+    0,
+    0,
+    title="Outer Block",
+    area.width,
+    area.height,
+    layout=GridLayout::new(3, 3),
+  )
+  block.add_all(labels)
+  Terminal::clear()
+  ter.draw(block)
+  println("")
+}
+
+test "layout test - GridLayout render blocks in block" {
+  let area = Area::new(40, 20)
+  let ter = Terminal::new(area)
+  let blocks : Array[&Widget] = Array::default()
+  for i in 0..<9 {
+    let b = Block::new(
+      0,
+      0,
+      10,
+      5,
+      title="B\{i}",
+      child=Label::new("Blk\{i}", left=2, top=2),
+    )
+    blocks.push(b)
+  }
+  let block = Block::new(
+    0,
+    0,
+    title="Outer Block",
+    area.width,
+    area.height,
+    layout=GridLayout::new(3, 3),
+  )
+  block.add_all(blocks)
+  Terminal::clear()
+  ter.draw(block)
+  println("")
+}
