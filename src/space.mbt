@@ -6,7 +6,7 @@ pub struct Area {
 
 ///|
 pub fn Area::new(width : Int, height : Int) -> Area {
-  Area::{ width, height }
+  Area::{ width: @cmp.maximum(0, width), height: @cmp.maximum(0, height) }
 }
 
 ///|
@@ -23,5 +23,5 @@ pub struct Section {
 
 ///|
 pub fn Section::new(area : Area, left : Int, top : Int) -> Section {
-  Section::{ area, left, top }
+  Section::{ area, left: @cmp.maximum(0, left), top: @cmp.maximum(0, top) }
 }

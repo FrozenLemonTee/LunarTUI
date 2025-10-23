@@ -7,7 +7,7 @@ pub struct Label {
 
 ///|
 pub fn Label::new(text : String, left? : Int = 0, top? : Int = 0) -> Label {
-  Label::{ text, left, top }
+  Label::{ text, left: @cmp.maximum(0, left), top: @cmp.maximum(0, top) }
 }
 
 ///|

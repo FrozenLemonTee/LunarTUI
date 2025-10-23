@@ -48,8 +48,8 @@ pub fn Frame::subframe(
     self.buf,
     Section::new(
       Area::new(width, height),
-      left + self.section.left,
-      top + self.section.top,
+      @cmp.maximum(0, left) + self.section.left,
+      @cmp.maximum(0, top) + self.section.top,
     ),
   )
 }

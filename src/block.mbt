@@ -20,9 +20,26 @@ pub fn Block::new(
   layout? : &Layout,
 ) -> Block {
   match child {
-    None => Block::{ title, left, top, width, height, children: [], layout }
+    None =>
+      Block::{
+        title,
+        left: @cmp.maximum(0, left),
+        top: @cmp.maximum(0, top),
+        width: @cmp.maximum(0, width),
+        height: @cmp.maximum(0, height),
+        children: [],
+        layout,
+      }
     Some(widget) =>
-      Block::{ title, left, top, width, height, children: [widget], layout }
+      Block::{
+        title,
+        left: @cmp.maximum(0, left),
+        top: @cmp.maximum(0, top),
+        width: @cmp.maximum(0, width),
+        height: @cmp.maximum(0, height),
+        children: [widget],
+        layout,
+      }
   }
 }
 
