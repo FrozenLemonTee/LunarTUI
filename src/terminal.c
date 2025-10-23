@@ -18,3 +18,7 @@ void terminal_put_char(char c) {
 void terminal_flush() {
     fflush(stdout);
 }
+
+void terminal_newline() {
+    printf("\r\n");
+}

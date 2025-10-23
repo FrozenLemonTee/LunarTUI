@@ -11,6 +11,9 @@ extern "c" fn terminal_put_char(ch : Char) -> Unit = "terminal_put_char"
 extern "c" fn terminal_flush() -> Unit = "terminal_flush"
 
 ///|
+extern "c" fn terminal_newline() -> Unit = "terminal_newline"
+
+///|
 pub struct Terminal {
   mut last : Buffer
   mut cur : Buffer
@@ -34,6 +37,11 @@ pub fn Terminal::put_char(ch : Char) -> Unit {
 ///|
 pub fn Terminal::flush() -> Unit {
   terminal_flush()
+}
+
+///|
+pub fn Terminal::newline() -> Unit {
+  terminal_newline()
 }
 
 ///|
