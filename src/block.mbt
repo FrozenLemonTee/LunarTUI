@@ -1,12 +1,8 @@
 ///|
 pub struct Block {
   mut title : String
-  left : Int
-  top : Int
-  width : Int
-  height : Int
-  children : Array[&Widget]
-  layout : &Layout?
+  section : Section
+  container : Container
 }
 
 ///|
@@ -19,28 +15,21 @@ pub fn Block::new(
   child? : &Widget,
   layout? : &Layout,
 ) -> Block {
-  match child {
-    None =>
-      Block::{
-        title,
-        left: @cmp.maximum(0, left),
-        top: @cmp.maximum(0, top),
-        width: @cmp.maximum(0, width),
-        height: @cmp.maximum(0, height),
-        children: [],
-        layout,
-      }
-    Some(widget) =>
-      Block::{
-        title,
-        left: @cmp.maximum(0, left),
-        top: @cmp.maximum(0, top),
-        width: @cmp.maximum(0, width),
-        height: @cmp.maximum(0, height),
-        children: [widget],
-        layout,
-      }
+  let left = @cmp.maximum(0, left)
+  let top = @cmp.maximum(0, top)
+  let width = @cmp.maximum(0, width)
+  let height = @cmp.maximum(0, height)
+  let section = Section::new(Area::new(width, height), left, top)
+  let block = match layout {
+    None => Block::{ title, section, container: Container::new(section) }
+    Some(layout) =>
+      Block::{ title, section, container: Container::new(layout~, section) }
   }
+  match child {
+    Some(child) => block.container.add(child)
+    None => block.container.add_all([])
+  }
+  block
 }
 
 ///|
@@ -50,12 +39,12 @@ pub fn Block::set_title(self : Block, title : String) -> Unit {
 
 ///|
 pub fn Block::add(self : Block, child : &Widget) -> Unit {
-  self.children.push(child)
+  self.container.add(child)
 }
 
 ///|
 pub fn Block::add_all(self : Block, children : Array[&Widget]) -> Unit {
-  self.children.append(children)
+  self.container.add_all(children)
 }
 
 ///|
@@ -66,18 +55,18 @@ pub fn Block::draw_border(
   ver? : Char = '|',
   edge? : Char = '+',
 ) -> Unit {
-  for i in 0..<self.width {
+  for i in 0..<self.width() {
     frame.set_chars(i, 0, hor)
-    frame.set_chars(i, self.height - 1, hor)
+    frame.set_chars(i, self.height() - 1, hor)
   }
-  for j in 0..<self.height {
+  for j in 0..<self.height() {
     frame.set_chars(0, j, ver)
-    frame.set_chars(self.width - 1, j, ver)
+    frame.set_chars(self.width() - 1, j, ver)
   }
   frame.set_chars(0, 0, edge)
-  frame.set_chars(self.width - 1, 0, edge)
-  frame.set_chars(0, self.height - 1, edge)
-  frame.set_chars(self.width - 1, self.height - 1, edge)
+  frame.set_chars(self.width() - 1, 0, edge)
+  frame.set_chars(0, self.height() - 1, edge)
+  frame.set_chars(self.width() - 1, self.height() - 1, edge)
 }
 
 ///|
@@ -89,44 +78,27 @@ pub fn Block::draw_title(self : Block, frame : Frame) -> Unit {
 
 ///|
 pub fn Block::draw_children(self : Block, frame : Frame) -> Unit {
-  guard self.children.length() > 0 else { return }
-  match self.layout {
-    None =>
-      for child in self.children {
-        child.render(frame)
-      }
-    Some(layout) => {
-      let sections = layout.split(
-        Area::new(self.width, self.height),
-        self.children,
-      )
-      for i, child in self.children.iter2() {
-        let sec = sections[i]
-        let subframe = frame.subframe(
-          sec.left,
-          sec.top,
-          sec.area.width,
-          sec.area.height,
-        )
-        child.render(subframe)
-      }
-    }
-  }
+  self.container.render(frame)
 }
 
 ///|
 pub impl Widget for Block with width(self : Block) -> Int {
-  self.width
+  self.section.area.width
 }
 
 ///|
 pub impl Widget for Block with height(self : Block) -> Int {
-  self.height
+  self.section.area.height
 }
 
 ///|
 pub impl Widget for Block with render(self : Block, frame : Frame) -> Unit {
-  let subframe = frame.subframe(self.left, self.top, self.width, self.height)
+  let subframe = frame.subframe(
+    self.section.left,
+    self.section.top,
+    self.width(),
+    self.height(),
+  )
   self.draw_border(subframe)
   self.draw_title(subframe)
   self.draw_children(subframe)
