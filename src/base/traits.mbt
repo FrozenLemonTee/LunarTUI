@@ -4,3 +4,10 @@ pub(open) trait Layout {
   width(self : Self, area : Area, children : Array[&Widget]) -> Int
   height(self : Self, area : Area, children : Array[&Widget]) -> Int
 }
+
+///|
+pub(open) trait Widget {
+  width(self : Self) -> Int
+  height(self : Self) -> Int
+  render(self : Self, frame : Frame) -> Unit
+}
