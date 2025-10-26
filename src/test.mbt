@@ -218,7 +218,7 @@ test "layout test - GridLayout render blocks in block" {
 ///|
 test "layout test - FlexLayout render adjust mode" {
   let blocks : Array[&Widget] = []
-  for i in 0..<3 {
+  for i in 0..<4 {
     let b = Block::new(
       0,
       0,
@@ -229,7 +229,7 @@ test "layout test - FlexLayout render adjust mode" {
     )
     blocks.push(b)
   }
-  let area = Area::new(60, 40)
+  let area = Area::new(80, 40)
   let ter = Terminal::new(area)
   let outer = Block::new(
     0,
@@ -243,7 +243,7 @@ test "layout test - FlexLayout render adjust mode" {
     0,
     0,
     title="Main axis: Start",
-    55,
+    70,
     5,
     layout=FlexLayout::new(direction=Row, justify=Start, align=Center),
   )
@@ -252,7 +252,7 @@ test "layout test - FlexLayout render adjust mode" {
     0,
     0,
     title="Main axis: Center",
-    55,
+    70,
     5,
     layout=FlexLayout::new(direction=Row, justify=Center, align=Center),
   )
@@ -261,7 +261,7 @@ test "layout test - FlexLayout render adjust mode" {
     0,
     0,
     title="Main axis: End",
-    55,
+    70,
     5,
     layout=FlexLayout::new(direction=Row, justify=End, align=Center),
   )
@@ -270,7 +270,7 @@ test "layout test - FlexLayout render adjust mode" {
     0,
     0,
     title="Main axis: SpaceBetween",
-    55,
+    70,
     5,
     layout=FlexLayout::new(direction=Row, justify=SpaceBetween, align=Center),
   )
@@ -279,7 +279,7 @@ test "layout test - FlexLayout render adjust mode" {
     0,
     0,
     title="Main axis: SpaceAround",
-    55,
+    70,
     5,
     layout=FlexLayout::new(direction=Row, justify=SpaceAround, align=Center),
   )
@@ -288,7 +288,7 @@ test "layout test - FlexLayout render adjust mode" {
     0,
     0,
     title="Main axis: SpaceEvenly",
-    55,
+    70,
     5,
     layout=FlexLayout::new(direction=Row, justify=SpaceEvenly, align=Center),
   )
