@@ -10,11 +10,11 @@ pub fn GridLayout::new(rows : Int, cols : Int) -> GridLayout {
 }
 
 ///|
-pub impl Layout for GridLayout with split(
+pub impl @base.Layout for GridLayout with split(
   self : GridLayout,
-  area : Area,
-  children : Array[&Widget],
-) -> Array[Section] {
+  area : @base.Area,
+  children : Array[&@base.Widget],
+) -> Array[@base.Section] {
   let rows = self.rows
   let cols = self.cols
   let grids = rows * cols
@@ -38,8 +38,8 @@ pub impl Layout for GridLayout with split(
       @cmp.maximum(cell_left, center_left - child.width() / 2),
       @cmp.maximum(cell_top, center_top - child.height() / 2),
     )
-    let section = Section::new(
-      Area::new(
+    let section = @base.Section::new(
+      @base.Area::new(
         @cmp.minimum(child.width(), cell_width),
         @cmp.minimum(child.height(), cell_height),
       ),
@@ -52,10 +52,10 @@ pub impl Layout for GridLayout with split(
 }
 
 ///|
-pub impl Layout for GridLayout with width(
+pub impl @base.Layout for GridLayout with width(
   self : GridLayout,
-  area : Area,
-  children : Array[&Widget],
+  area : @base.Area,
+  children : Array[&@base.Widget],
 ) -> Int {
   ignore(children) // NOLINT
   if self.cols == 0 || self.rows == 0 {
@@ -65,10 +65,10 @@ pub impl Layout for GridLayout with width(
 }
 
 ///|
-pub impl Layout for GridLayout with height(
+pub impl @base.Layout for GridLayout with height(
   self : GridLayout,
-  area : Area,
-  children : Array[&Widget],
+  area : @base.Area,
+  children : Array[&@base.Widget],
 ) -> Int {
   ignore(children) // NOLINT
   if self.cols == 0 || self.rows == 0 {

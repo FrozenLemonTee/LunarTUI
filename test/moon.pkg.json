@@ -1,0 +1,8 @@
+{
+    "import" : [
+        "FrozenLemonTee/tui-rabbit/src/base",
+        "FrozenLemonTee/tui-rabbit/src/widgets",
+        "FrozenLemonTee/tui-rabbit/src/layouts",
+        "FrozenLemonTee/tui-rabbit/src/terminal"
+    ]
+}

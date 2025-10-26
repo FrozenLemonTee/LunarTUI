@@ -1,7 +1,7 @@
 ///|
 pub struct Block {
   mut title : String
-  section : Section
+  section : @base.Section
   container : Container
 }
 
@@ -12,14 +12,14 @@ pub fn Block::new(
   width : Int,
   height : Int,
   title? : String = "",
-  child? : &Widget,
-  layout? : &Layout,
+  child? : &@base.Widget,
+  layout? : &@base.Layout,
 ) -> Block {
   let left = @cmp.maximum(0, left)
   let top = @cmp.maximum(0, top)
   let width = @cmp.maximum(0, width)
   let height = @cmp.maximum(0, height)
-  let section = Section::new(Area::new(width, height), left, top)
+  let section = @base.Section::new(@base.Area::new(width, height), left, top)
   let block = match layout {
     None => Block::{ title, section, container: Container::new(section) }
     Some(layout) =>
@@ -38,19 +38,19 @@ pub fn Block::set_title(self : Block, title : String) -> Unit {
 }
 
 ///|
-pub fn Block::add(self : Block, child : &Widget) -> Unit {
+pub fn Block::add(self : Block, child : &@base.Widget) -> Unit {
   self.container.add(child)
 }
 
 ///|
-pub fn Block::add_all(self : Block, children : Array[&Widget]) -> Unit {
+pub fn Block::add_all(self : Block, children : Array[&@base.Widget]) -> Unit {
   self.container.add_all(children)
 }
 
 ///|
 pub fn Block::draw_border(
   self : Block,
-  frame : Frame,
+  frame : @base.Frame,
   hor? : Char = '-',
   ver? : Char = '|',
   edge? : Char = '+',
@@ -70,29 +70,29 @@ pub fn Block::draw_border(
 }
 
 ///|
-pub fn Block::draw_title(self : Block, frame : Frame) -> Unit {
+pub fn Block::draw_title(self : Block, frame : @base.Frame) -> Unit {
   for i, ch in self.title.iter2() {
     frame.set_chars(2 + i, 0, ch)
   }
 }
 
 ///|
-pub fn Block::draw_children(self : Block, frame : Frame) -> Unit {
+pub fn Block::draw_children(self : Block, frame : @base.Frame) -> Unit {
   self.container.render(frame)
 }
 
 ///|
-pub impl Widget for Block with width(self : Block) -> Int {
+pub impl @base.Widget for Block with width(self : Block) -> Int {
   self.section.area.width
 }
 
 ///|
-pub impl Widget for Block with height(self : Block) -> Int {
+pub impl @base.Widget for Block with height(self : Block) -> Int {
   self.section.area.height
 }
 
 ///|
-pub impl Widget for Block with render(self : Block, frame : Frame) -> Unit {
+pub impl @base.Widget for Block with render(self : Block, frame : @base.Frame) -> Unit {
   let subframe = frame.subframe(
     self.section.left,
     self.section.top,

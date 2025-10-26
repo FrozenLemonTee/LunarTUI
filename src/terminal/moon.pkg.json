@@ -1,4 +1,7 @@
 {
+    "import" : [
+      "FrozenLemonTee/tui-rabbit/src/base"
+    ],
     "supported-targets" : ["native"],
     "link" : {
         "native" : {

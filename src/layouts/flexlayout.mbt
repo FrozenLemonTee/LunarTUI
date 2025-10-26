@@ -1,11 +1,11 @@
 ///|
-pub enum FlexDirection {
+pub(all) enum FlexDirection {
   Row
   Column
 } derive(Eq)
 
 ///|
-pub enum Justify {
+pub(all) enum Justify {
   Start
   Center
   End
@@ -15,14 +15,14 @@ pub enum Justify {
 } derive(Eq)
 
 ///|
-pub enum Align {
+pub(all) enum Align {
   Start
   Center
   End
 } derive(Eq)
 
 ///|
-pub struct FlexLayout {
+pub(all) struct FlexLayout {
   direction : FlexDirection
   justify : Justify
   align : Align
@@ -38,7 +38,7 @@ pub fn FlexLayout::new(
 }
 
 ///|
-fn FlexLayout::child_main_size(self : FlexLayout, child : &Widget) -> Int {
+fn FlexLayout::child_main_size(self : FlexLayout, child : &@base.Widget) -> Int {
   match self.direction {
     Row => child.width()
     Column => child.height()
@@ -46,7 +46,10 @@ fn FlexLayout::child_main_size(self : FlexLayout, child : &Widget) -> Int {
 }
 
 ///|
-fn FlexLayout::child_cross_size(self : FlexLayout, child : &Widget) -> Int {
+fn FlexLayout::child_cross_size(
+  self : FlexLayout,
+  child : &@base.Widget,
+) -> Int {
   match self.direction {
     Row => child.height()
     Column => child.width()
@@ -54,11 +57,11 @@ fn FlexLayout::child_cross_size(self : FlexLayout, child : &Widget) -> Int {
 }
 
 ///|
-pub impl Layout for FlexLayout with split(
+pub impl @base.Layout for FlexLayout with split(
   self : FlexLayout,
-  area : Area,
-  children : Array[&Widget],
-) -> Array[Section] {
+  area : @base.Area,
+  children : Array[&@base.Widget],
+) -> Array[@base.Section] {
   let count = children.length()
   if count == 0 {
     return []
@@ -126,16 +129,16 @@ pub impl Layout for FlexLayout with split(
       Row => (cur, cross, child.width(), cross_size)
       Column => (cross, cur, cross_size, child.height())
     }
-    sections.push(Section::new(Area::new(width, height), x, y))
+    sections.push(@base.Section::new(@base.Area::new(width, height), x, y))
   }
   sections
 }
 
 ///|
-pub impl Layout for FlexLayout with width(
+pub impl @base.Layout for FlexLayout with width(
   self : FlexLayout,
-  area : Area,
-  children : Array[&Widget],
+  area : @base.Area,
+  children : Array[&@base.Widget],
 ) {
   if children.is_empty() {
     return 0
@@ -152,10 +155,10 @@ pub impl Layout for FlexLayout with width(
 }
 
 ///|
-pub impl Layout for FlexLayout with height(
+pub impl @base.Layout for FlexLayout with height(
   self : FlexLayout,
-  area : Area,
-  children : Array[&Widget],
+  area : @base.Area,
+  children : Array[&@base.Widget],
 ) {
   if children.is_empty() {
     return 0

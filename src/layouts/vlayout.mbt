@@ -7,11 +7,11 @@ pub fn VLayout::new() -> VLayout {
 }
 
 ///|
-pub impl Layout for VLayout with split(
+pub impl @base.Layout for VLayout with split(
   self : VLayout,
-  area : Area,
-  children : Array[&Widget],
-) -> Array[Section] {
+  area : @base.Area,
+  children : Array[&@base.Widget],
+) -> Array[@base.Section] {
   ignore(self) // NOLINT
   let count = children.length()
   if count == 0 {
@@ -31,8 +31,8 @@ pub impl Layout for VLayout with split(
       @cmp.maximum(cell_left, center_left - child.width() / 2),
       @cmp.maximum(cell_top, center_top - child.height() / 2),
     )
-    let section = Section::new(
-      Area::new(
+    let section = @base.Section::new(
+      @base.Area::new(
         @cmp.minimum(child.width(), cell_width),
         @cmp.minimum(child.height(), cell_height),
       ),
@@ -45,10 +45,10 @@ pub impl Layout for VLayout with split(
 }
 
 ///|
-pub impl Layout for VLayout with width(
+pub impl @base.Layout for VLayout with width(
   self : VLayout,
-  area : Area,
-  children : Array[&Widget],
+  area : @base.Area,
+  children : Array[&@base.Widget],
 ) -> Int {
   ignore(self) // NOLINT
   let child_max = children
@@ -59,10 +59,10 @@ pub impl Layout for VLayout with width(
 }
 
 ///|
-pub impl Layout for VLayout with height(
+pub impl @base.Layout for VLayout with height(
   self : VLayout,
-  area : Area,
-  children : Array[&Widget],
+  area : @base.Area,
+  children : Array[&@base.Widget],
 ) -> Int {
   ignore(self) // NOLINT
   let children_total = children

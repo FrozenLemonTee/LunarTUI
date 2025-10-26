@@ -1,31 +1,34 @@
 ///|
 pub struct Container {
-  layout : &Layout?
-  section : Section
-  children : Array[&Widget]
+  layout : &@base.Layout?
+  section : @base.Section
+  children : Array[&@base.Widget]
 }
 
 ///|
 pub fn Container::new(
-  layout? : &Layout,
-  section : Section,
-  children? : Array[&Widget] = [],
+  layout? : &@base.Layout,
+  section : @base.Section,
+  children? : Array[&@base.Widget] = [],
 ) -> Container {
   Container::{ layout, section, children }
 }
 
 ///|
-pub fn Container::add(self : Container, child : &Widget) -> Unit {
+pub fn Container::add(self : Container, child : &@base.Widget) -> Unit {
   self.children.push(child)
 }
 
 ///|
-pub fn Container::add_all(self : Container, children : Array[&Widget]) -> Unit {
+pub fn Container::add_all(
+  self : Container,
+  children : Array[&@base.Widget],
+) -> Unit {
   self.children.append(children)
 }
 
 ///|
-pub impl Widget for Container with width(self : Container) -> Int {
+pub impl @base.Widget for Container with width(self : Container) -> Int {
   match self.layout {
     Some(layout) => layout.width(self.section.area, self.children)
     None => self.section.area.width
@@ -33,7 +36,7 @@ pub impl Widget for Container with width(self : Container) -> Int {
 }
 
 ///|
-pub impl Widget for Container with height(self : Container) -> Int {
+pub impl @base.Widget for Container with height(self : Container) -> Int {
   match self.layout {
     Some(layout) => layout.height(self.section.area, self.children)
     None => self.section.area.height
@@ -41,7 +44,10 @@ pub impl Widget for Container with height(self : Container) -> Int {
 }
 
 ///|
-pub impl Widget for Container with render(self : Container, frame : Frame) -> Unit {
+pub impl @base.Widget for Container with render(
+  self : Container,
+  frame : @base.Frame,
+) -> Unit {
   if self.children.is_empty() {
     return
   }

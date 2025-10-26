@@ -15,8 +15,8 @@ extern "c" fn terminal_newline() -> Unit = "terminal_newline"
 
 ///|
 pub struct Terminal {
-  mut last : Buffer
-  mut cur : Buffer
+  mut last : @base.Buffer
+  mut cur : @base.Buffer
 }
 
 ///|
@@ -45,15 +45,19 @@ pub fn Terminal::newline() -> Unit {
 }
 
 ///|
-pub fn Terminal::new(area : Area) -> Terminal {
-  Terminal::{ last: Buffer::new(area), cur: Buffer::new(area) }
+pub fn Terminal::new(area : @base.Area) -> Terminal {
+  Terminal::{ last: @base.Buffer::new(area), cur: @base.Buffer::new(area) }
 }
 
 ///|
-pub fn[T : Widget] Terminal::draw(self : Terminal, widget : T) -> Unit {
-  let frame = Frame::new(
+pub fn[T : @base.Widget] Terminal::draw(self : Terminal, widget : T) -> Unit {
+  let frame = @base.Frame::new(
     self.cur,
-    Section::new(Area::new(self.cur.width(), self.cur.height()), 0, 0),
+    @base.Section::new(
+      @base.Area::new(self.cur.width(), self.cur.height()),
+      0,
+      0,
+    ),
   )
   widget.render(frame)
   self.cur = frame.buf

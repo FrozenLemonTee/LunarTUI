@@ -1,0 +1,5 @@
+{
+    "import" : [
+        "FrozenLemonTee/tui-rabbit/src/base"
+    ]
+}
