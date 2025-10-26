@@ -72,31 +72,50 @@ pub impl Layout for FlexLayout with split(
     .map(fn(child) { self.child_main_size(child) })
     .fold(fn(acc, cur) { acc + cur }, init=0)
   let remaining = main_size - main_size_children
+  if remaining < 0 {
+    return []
+  }
+  let (space, extra_init) = match self.justify {
+    SpaceBetween =>
+      if count > 1 {
+        (remaining / (count - 1), remaining % (count - 1))
+      } else {
+        (0, 0)
+      }
+    SpaceAround => (remaining / count, remaining % count)
+    SpaceEvenly => (remaining / (count + 1), remaining % (count + 1))
+    _ => (0, 0)
+  }
   let mut offset = match self.justify {
     Start => 0
     Center => remaining / 2
     End => remaining
     SpaceBetween => 0
-    SpaceAround => remaining / count / 2
-    SpaceEvenly => remaining / (count + 1)
+    SpaceAround => space / 2
+    SpaceEvenly => space
   }
   let sections = Array::default()
+  let mut extra = extra_init
   for i, child in children.iter2() {
-    let main = {
-      let mut cur = offset
-      offset += self.child_main_size(child)
-      if self.justify == SpaceBetween {
-        if i < count - 1 {
-          offset += remaining / (count - 1)
-        } else {
-          cur = main_size - self.child_main_size(child)
+    let cur = offset
+    let main_step = self.child_main_size(child)
+    offset += main_step
+    match self.justify {
+      SpaceBetween if i < count - 1 => {
+        offset += space
+        if extra > 0 {
+          offset += 1
+          extra -= 1
         }
-      } else if self.justify == SpaceAround {
-        offset += remaining / count
-      } else if self.justify == SpaceEvenly {
-        offset += remaining / (count + 1)
       }
-      cur
+      SpaceAround | SpaceEvenly => {
+        offset += space
+        if extra > 0 {
+          offset += 1
+          extra -= 1
+        }
+      }
+      _ => ()
     }
     let cross = match self.align {
       Start => 0
@@ -104,8 +123,8 @@ pub impl Layout for FlexLayout with split(
       End => cross_size - self.child_cross_size(child)
     }
     let (x, y, width, height) = match self.direction {
-      Row => (main, cross, child.width(), cross_size)
-      Column => (cross, main, cross_size, child.height())
+      Row => (cur, cross, child.width(), cross_size)
+      Column => (cross, cur, cross_size, child.height())
     }
     sections.push(Section::new(Area::new(width, height), x, y))
   }
