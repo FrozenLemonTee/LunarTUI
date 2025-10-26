@@ -43,3 +43,31 @@ pub impl Layout for VLayout with split(
   }
   sections
 }
+
+///|
+pub impl Layout for VLayout with width(
+  self : VLayout,
+  area : Area,
+  children : Array[&Widget],
+) -> Int {
+  ignore(self) // NOLINT
+  let child_max = children
+    .iter()
+    .map(fn(child) { child.width() })
+    .fold(fn(max, cur) { @cmp.maximum(max, cur) }, init=0)
+  @cmp.minimum(child_max, area.width)
+}
+
+///|
+pub impl Layout for VLayout with height(
+  self : VLayout,
+  area : Area,
+  children : Array[&Widget],
+) -> Int {
+  ignore(self) // NOLINT
+  let children_total = children
+    .iter()
+    .map(fn(child) { child.height() })
+    .fold(fn(acc, cur) { acc + cur }, init=0)
+  @cmp.minimum(children_total, area.height)
+}

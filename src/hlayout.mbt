@@ -43,3 +43,31 @@ pub impl Layout for HLayout with split(
   }
   sections
 }
+
+///|
+pub impl Layout for HLayout with width(
+  self : HLayout,
+  area : Area,
+  children : Array[&Widget],
+) -> Int {
+  ignore(self) // NOLINT
+  let children_total = children
+    .iter()
+    .map(fn(child) { child.width() })
+    .fold(fn(acc, cur) { acc + cur }, init=0)
+  @cmp.minimum(children_total, area.width)
+}
+
+///|
+pub impl Layout for HLayout with height(
+  self : HLayout,
+  area : Area,
+  children : Array[&Widget],
+) -> Int {
+  ignore(self) // NOLINT
+  let child_max = children
+    .iter()
+    .map(fn(child) { child.height() })
+    .fold(fn(max, cur) { @cmp.maximum(max, cur) }, init=0)
+  @cmp.minimum(child_max, area.height)
+}

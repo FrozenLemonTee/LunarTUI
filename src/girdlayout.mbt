@@ -50,3 +50,29 @@ pub impl Layout for GridLayout with split(
   }
   sections
 }
+
+///|
+pub impl Layout for GridLayout with width(
+  self : GridLayout,
+  area : Area,
+  children : Array[&Widget],
+) -> Int {
+  ignore(children) // NOLINT
+  if self.cols == 0 || self.rows == 0 {
+    return 0
+  }
+  @cmp.minimum(area.width, self.cols * (area.width / self.cols))
+}
+
+///|
+pub impl Layout for GridLayout with height(
+  self : GridLayout,
+  area : Area,
+  children : Array[&Widget],
+) -> Int {
+  ignore(children) // NOLINT
+  if self.cols == 0 || self.rows == 0 {
+    return 0
+  }
+  @cmp.minimum(area.height, self.rows * (area.height / self.rows))
+}

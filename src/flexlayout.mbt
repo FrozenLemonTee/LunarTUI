@@ -111,3 +111,43 @@ pub impl Layout for FlexLayout with split(
   }
   sections
 }
+
+///|
+pub impl Layout for FlexLayout with width(
+  self : FlexLayout,
+  area : Area,
+  children : Array[&Widget],
+) {
+  if children.is_empty() {
+    return 0
+  }
+  let fold = match self.direction {
+    Row => fn(acc : Int, cur : Int) { acc + cur }
+    Column => fn(max : Int, cur : Int) { @cmp.maximum(max, cur) }
+  }
+  let children_size = children
+    .iter()
+    .map(fn(child) { child.width() })
+    .fold(fold, init=0)
+  @cmp.minimum(children_size, area.width)
+}
+
+///|
+pub impl Layout for FlexLayout with height(
+  self : FlexLayout,
+  area : Area,
+  children : Array[&Widget],
+) {
+  if children.is_empty() {
+    return 0
+  }
+  let fold = match self.direction {
+    Row => fn(max : Int, cur : Int) { @cmp.maximum(max, cur) }
+    Column => fn(acc : Int, cur : Int) { acc + cur }
+  }
+  let children_size = children
+    .iter()
+    .map(fn(child) { child.height() })
+    .fold(fold, init=0)
+  @cmp.minimum(children_size, area.height)
+}
