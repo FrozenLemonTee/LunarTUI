@@ -27,7 +27,7 @@ pub fn Block::new(
   }
   match child {
     Some(child) => block.container.add(child)
-    None => block.container.add_all([])
+    None => ()
   }
   block
 }
