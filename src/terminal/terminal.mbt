@@ -50,7 +50,7 @@ pub fn Terminal::new(area : @base.Area) -> Terminal {
 }
 
 ///|
-pub fn[T : @base.Widget] Terminal::draw(self : Terminal, widget : T) -> Unit {
+pub fn Terminal::draw(self : Terminal, widget : &@base.Widget) -> Unit {
   let frame = @base.Frame::new(
     self.cur,
     @base.Section::new(
