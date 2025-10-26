@@ -362,3 +362,33 @@ test "layout test - FlexLayout render align mode" {
   ter.draw(outer)
   Terminal::newline()
 }
+
+///|
+test "layout test - FlexLayout render adjust mode vertical main axis" {
+  let area = Area::new(30, 40)
+  let ter = Terminal::new(area)
+  let block = Block::new(
+    0,
+    0,
+    area.width,
+    area.height,
+    title="FlexLayout Vertical Test",
+    layout=FlexLayout::new(direction=Column, justify=SpaceAround, align=Center),
+  )
+  let blocks : Array[&Widget] = []
+  for i in 0..<6 {
+    let b = Block::new(
+      0,
+      0,
+      10,
+      3,
+      title="B\{i}",
+      child=Label::new("Blk\{i}", left=2, top=1),
+    )
+    blocks.push(b)
+  }
+  block.add_all(blocks)
+  Terminal::clear()
+  ter.draw(block)
+  Terminal::newline()
+}
