@@ -7,6 +7,19 @@ pub struct Container {
 
 ///|
 pub fn Container::new(
+  left : Int,
+  top : Int,
+  width : Int,
+  height : Int,
+  layout? : &@base.Layout,
+  children? : Array[&@base.Widget] = []
+) -> Container {
+  let section = @base.Section::new(@base.Area::new(width, height), left, top)
+  Container::fromSection(layout?, section, children=children)
+}
+
+///|
+pub fn Container::fromSection(
   layout? : &@base.Layout,
   section : @base.Section,
   children? : Array[&@base.Widget] = [],

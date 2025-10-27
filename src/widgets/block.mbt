@@ -21,15 +21,32 @@ pub fn Block::new(
   let height = @cmp.maximum(0, height)
   let section = @base.Section::new(@base.Area::new(width, height), left, top)
   let block = match layout {
-    None => Block::{ title, section, container: Container::new(section) }
+    None => Block::{ title, section, container: Container::fromSection(section) }
     Some(layout) =>
-      Block::{ title, section, container: Container::new(layout~, section) }
+      Block::{ title, section, container: Container::fromSection(layout~, section) }
   }
   match child {
     Some(child) => block.container.add(child)
     None => ()
   }
   block
+}
+
+pub fn Block::fromSection(
+  section : @base.Section,
+  title? : String = "",
+  child? : &@base.Widget,
+  layout? : &@base.Layout,
+) -> Block {
+  Block::new(
+    section.left,
+    section.top,
+    section.area.width,
+    section.area.height,
+    title=title,
+    child?,
+    layout?
+  )
 }
 
 ///|
