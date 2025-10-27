@@ -1,5 +1,5 @@
 ///|
-pub(all) enum FlexDirection {
+pub(all) enum Direction {
   Row
   Column
 } derive(Eq)
@@ -23,14 +23,14 @@ pub(all) enum Align {
 
 ///|
 pub(all) struct FlexLayout {
-  direction : FlexDirection
+  direction : Direction
   justify : Justify
   align : Align
 }
 
 ///|
 pub fn FlexLayout::new(
-  direction? : FlexDirection = FlexDirection::Row,
+  direction? : Direction = Direction::Row,
   justify? : Justify = Justify::Start,
   align? : Align = Align::Start,
 ) -> FlexLayout {
