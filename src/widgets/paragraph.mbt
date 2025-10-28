@@ -1,22 +1,25 @@
+///|
 pub(all) enum Align {
   Left
   Center
   Right
 }
 
+///|
 pub struct Paragraph {
   text : String
   align : Align
   section : @base.Section
 }
 
+///|
 pub fn Paragraph::new(
   left : Int,
   top : Int,
   width : Int,
   height : Int,
   text : String,
-  align? : Align = Align::Left
+  align? : Align = Align::Left,
 ) -> Paragraph {
   let left = @cmp.maximum(0, left)
   let top = @cmp.maximum(0, top)
@@ -26,22 +29,26 @@ pub fn Paragraph::new(
   Paragraph::{ text, align, section }
 }
 
-pub fn Paragraph::fromSection(
+///|
+pub fn Paragraph::from_section(
   section : @base.Section,
   text : String,
-  align? : Align = Align::Left
+  align? : Align = Align::Left,
 ) -> Paragraph {
   Paragraph::{ text, align, section }
 }
 
+///|
 pub impl @base.Widget for Paragraph with width(self : Paragraph) -> Int {
   self.section.area.width
 }
 
+///|
 pub impl @base.Widget for Paragraph with height(self : Paragraph) -> Int {
   self.section.area.height
 }
 
+///|
 fn Paragraph::indices(self : Paragraph) -> Array[Int] {
   let text = self.text
   let width = self.section.area.width
