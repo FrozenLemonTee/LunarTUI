@@ -61,9 +61,52 @@ fn Paragraph::indices(self : Paragraph) -> Array[Int] {
   line_starts
 }
 
+///|
+fn Paragraph::draw_line(
+  self : Paragraph,
+  frame : @base.Frame,
+  start : Int,
+  end : Int,
+) -> Unit {
+  let text = self.text.view()
+  if start >= text.length() {
+    return
+  }
+  let line_len = end - start
+  let line = text.iter().drop(start).take(line_len)
+  let line_len_max = self.width()
+  let space = line_len_max - line_len
+  let left = match self.align {
+    Center => space / 2
+    Left => 0
+    Right => line_len_max - line_len
+  }
+  let subframe = frame.subframe(left, 0, line_len_max, 1)
+  for i, ch in line.iter2() {
+    subframe.set_chars(i, 0, ch)
+  }
+}
+
+///|
 pub impl @base.Widget for Paragraph with render(
   self : Paragraph,
-  frame : @base.Frame
+  frame : @base.Frame,
 ) -> Unit {
-  // todo
+  let subframe = frame.subframe(
+    self.section.left,
+    self.section.top,
+    self.width(),
+    self.height(),
+  )
+  let line_starts = self.indices()
+  for i in 0..<line_starts.length() {
+    let start = line_starts[i]
+    let end = if i + 1 < line_starts.length() {
+      line_starts[i + 1]
+    } else {
+      self.text.length()
+    }
+    let frame_line = subframe.subframe(0, i, self.width(), 1)
+    self.draw_line(frame_line, start, end)
+  }
 }
