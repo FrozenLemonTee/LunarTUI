@@ -12,14 +12,14 @@ pub fn Container::new(
   width : Int,
   height : Int,
   layout? : &@base.Layout,
-  children? : Array[&@base.Widget] = []
+  children? : Array[&@base.Widget] = [],
 ) -> Container {
   let section = @base.Section::new(@base.Area::new(width, height), left, top)
-  Container::fromSection(layout?, section, children=children)
+  Container::from_section(layout?, section, children~)
 }
 
 ///|
-pub fn Container::fromSection(
+pub fn Container::from_section(
   layout? : &@base.Layout,
   section : @base.Section,
   children? : Array[&@base.Widget] = [],
