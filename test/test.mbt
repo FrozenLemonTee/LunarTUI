@@ -408,3 +408,33 @@ test "layout test - FlexLayout render adjust mode vertical main axis" {
   ter.draw(block)
   @terminal.Terminal::newline()
 }
+
+///|
+test "Paragraph test - render basic" {
+  let area = @base.Area::new(40, 20)
+  let ter = @terminal.Terminal::new(area)
+  let block = @widgets.Block::from_section(
+    @base.Section::new(area, 0, 0),
+    title="Paragraph Test",
+  )
+  let para1 = @widgets.Paragraph::from_section(
+    @base.Section::new(@base.Area::new(30, 20), 0, 0),
+    "This is a sample paragraph widget.\nIt supports text wrapping and alignment.",
+  )
+  let para2 = @widgets.Paragraph::from_section(
+    @base.Section::new(@base.Area::new(30, 20), 0, 6),
+    "This paragraph is center aligned.\nIt should appear in the center of its area.",
+    align=Center,
+  )
+  let para3 = @widgets.Paragraph::from_section(
+    @base.Section::new(@base.Area::new(30, 20), 0, 12),
+    "This paragraph is right aligned.\nIt should appear on the right side of its area.",
+    align=Right,
+  )
+  block.add(para1)
+  block.add(para2)
+  block.add(para3)
+  @terminal.Terminal::clear()
+  ter.draw(block)
+  @terminal.Terminal::newline()
+}
