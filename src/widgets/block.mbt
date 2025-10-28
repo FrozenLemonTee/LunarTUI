@@ -101,7 +101,8 @@ pub fn Block::draw_title(self : Block, frame : @base.Frame) -> Unit {
 
 ///|
 pub fn Block::draw_children(self : Block, frame : @base.Frame) -> Unit {
-  self.container.render(frame)
+  let subframe = frame.subframe(1, 1, self.width() - 2, self.height() - 2)
+  self.container.render(subframe)
 }
 
 ///|
