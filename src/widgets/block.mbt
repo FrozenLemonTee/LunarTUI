@@ -19,15 +19,28 @@ pub fn Block::new(
   let top = @cmp.maximum(0, top)
   let width = @cmp.maximum(0, width)
   let height = @cmp.maximum(0, height)
-  let section = @base.Section::new(@base.Area::new(width, height), left, top)
+  let section_block = @base.Section::new(
+    @base.Area::new(width, height),
+    left,
+    top,
+  )
+  let section_children = @base.Section::new(
+    @base.Area::new(width - 1, height - 1),
+    left + 1,
+    top + 1,
+  )
   let block = match layout {
     None =>
-      Block::{ title, section, container: Container::from_section(section) }
+      Block::{
+        title,
+        section: section_block,
+        container: Container::from_section(section_children),
+      }
     Some(layout) =>
       Block::{
         title,
-        section,
-        container: Container::from_section(layout~, section),
+        section: section_block,
+        container: Container::from_section(layout~, section_children),
       }
   }
   match child {

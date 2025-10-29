@@ -225,7 +225,7 @@ test "layout test - FlexLayout render adjust mode" {
       10,
       3,
       title="B\{i}",
-      child=@widgets.Label::new("Blk\{i}", left=2, top=1),
+      child=@widgets.Label::new("Blk\{i}", left=2, top=0),
     )
     blocks.push(b)
   }
@@ -326,7 +326,7 @@ test "layout test - FlexLayout render align mode" {
       10,
       3,
       title="B\{i}",
-      child=@widgets.Label::new("Blk\{i}", left=2, top=1),
+      child=@widgets.Label::new("Blk\{i}", left=2, top=0),
     )
     blocks.push(b)
   }
@@ -399,7 +399,7 @@ test "layout test - FlexLayout render adjust mode vertical main axis" {
       10,
       3,
       title="B\{i}",
-      child=@widgets.Label::new("Blk\{i}", left=2, top=1),
+      child=@widgets.Label::new("Blk\{i}", left=2, top=0),
     )
     blocks.push(b)
   }
