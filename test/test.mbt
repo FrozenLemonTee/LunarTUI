@@ -454,9 +454,7 @@ test "Image test - render from file" {
       let file_name = "test/ascii_pic.txt"
       let file_dir = @path.Path::new(cwd)
       file_dir.push(file_name)
-      let pic = @widgets.Image::from_file(
-        file_dir.to_string(),
-      )
+      let pic = @widgets.Image::from_file(file_dir.to_string())
       let ter = @terminal.Terminal::new(area)
       block.add(pic)
       @terminal.Terminal::clear()
@@ -490,6 +488,33 @@ test "Image test - render from string and array" {
   block.add(pic)
   block.add(art)
   @terminal.Terminal::clear()
+  ter.draw(block)
+  @terminal.Terminal::newline()
+}
+
+test "ProgressBar test - render" {
+  let area = @base.Area::new(80, 30)
+  let block = @widgets.Block::from_section(
+    @base.Section::new(area, 0, 0),
+    title="ProgressBar test",
+    layout=@layouts.FlexLayout::new(
+      direction=Column,
+      justify=SpaceEvenly,
+      align=Center,
+    ),
+  )
+  let p1 = @widgets.ProgressBar::new(20, value=0, prefix="p1", suffix="Initializing")
+  let p2 = @widgets.ProgressBar::new(20, value=0.25, prefix="p2", suffix="processing")
+  let p3 = @widgets.ProgressBar::new(20, value=0.5, prefix="p3", suffix="processing")
+  let p4 = @widgets.ProgressBar::new(20, value=0.75, prefix="p4", suffix="processing")
+  let p5 = @widgets.ProgressBar::new(20, value=1, prefix="p5", suffix="done")
+  block.add(p1)
+  block.add(p2)
+  block.add(p3)
+  block.add(p4)
+  block.add(p5)
+  @terminal.Terminal::clear()
+  let ter = @terminal.Terminal::new(area)
   ter.draw(block)
   @terminal.Terminal::newline()
 }
