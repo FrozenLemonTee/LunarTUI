@@ -447,14 +447,23 @@ test "Image test - render from file" {
     title="Image test",
     layout=@layouts.FlexLayout::new(),
   )
-  let pic = @widgets.Image::from_file(
-    "D:\\FrozenlemonTee\\tui-rabbit\\test\\ascii_pic.txt",
-  )
-  let ter = @terminal.Terminal::new(area)
-  block.add(pic)
-  @terminal.Terminal::clear()
-  ter.draw(block)
-  @terminal.Terminal::newline()
+  let cwd = @env.current_dir()
+  match cwd {
+    None => ()
+    Some(cwd) => {
+      let file_name = "test/ascii_pic.txt"
+      let file_dir = @path.Path::new(cwd)
+      file_dir.push(file_name)
+      let pic = @widgets.Image::from_file(
+        file_dir.to_string(),
+      )
+      let ter = @terminal.Terminal::new(area)
+      block.add(pic)
+      @terminal.Terminal::clear()
+      ter.draw(block)
+      @terminal.Terminal::newline()
+    }
+  }
 }
 
 ///|
