@@ -438,3 +438,49 @@ test "Paragraph test - render basic" {
   ter.draw(block)
   @terminal.Terminal::newline()
 }
+
+///|
+test "Image test - render from file" {
+  let area = @base.Area::new(110, 10)
+  let block = @widgets.Block::from_section(
+    @base.Section::new(area, 0, 0),
+    title="Image test",
+    layout=@layouts.FlexLayout::new(),
+  )
+  let pic = @widgets.Image::from_file(
+    "D:\\FrozenlemonTee\\tui-rabbit\\test\\ascii_pic.txt",
+  )
+  let ter = @terminal.Terminal::new(area)
+  block.add(pic)
+  @terminal.Terminal::clear()
+  ter.draw(block)
+  @terminal.Terminal::newline()
+}
+
+///|
+test "Image test - render from string and array" {
+  let area = @base.Area::new(40, 20)
+  let str_pic = "1234567890\n!@#$%^&*()\nqwertyuiop\nasdfghjkl;\nzxcvbnm,./"
+  let ascii_art = [
+    '/', '\\', '\\', '_', '/', '\\', '\\', '\n', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+    '\n', '(', ' ', 'o', '.', 'o', ' ', ')', '\n', ' ', ' ', ' ', ' ', ' ', ' ',
+    ' ', '\n', ' ', '>', ' ', '^', ' ', '<', ' ', '\n',
+  ]
+  let block = @widgets.Block::from_section(
+    @base.Section::new(area, 0, 0),
+    title="Image test",
+    layout=@layouts.FlexLayout::new(
+      direction=Column,
+      justify=SpaceEvenly,
+      align=Center,
+    ),
+  )
+  let pic = @widgets.Image::from_string(str_pic)
+  let art = @widgets.Image::new(ascii_art, 8, 5)
+  let ter = @terminal.Terminal::new(area)
+  block.add(pic)
+  block.add(art)
+  @terminal.Terminal::clear()
+  ter.draw(block)
+  @terminal.Terminal::newline()
+}
