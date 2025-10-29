@@ -38,12 +38,48 @@ void terminal_clear() {
 }
 
 /**
- * @brief Outputs a single character to the terminal
+ * @brief Outputs a single Unicode code point as UTF-8 to the terminal
  * 
- * @param c The character to be displayed at the current cursor position
+ * @details This function takes a Unicode code point and encodes it as UTF-8 for output
+ *          to the terminal. It supports the full Unicode range from U+0000 to U+10FFFF.
+ *          The function handles encoding for:
+ *          - ASCII characters (U+0000 to U+007F): 1 byte
+ *          - Two-byte UTF-8 sequence (U+0080 to U+07FF)
+ *          - Three-byte UTF-8 sequence (U+0800 to U+FFFF)
+ *          - Four-byte UTF-8 sequence (U+10000 to U+10FFFF)
+ * 
+ * @param ch The Unicode code point to be displayed at the current cursor position.
+ *           Must be a valid Unicode code point (0 to 0x10FFFF).
+ * 
+ * @note Invalid code points (negative or above U+10FFFF) are silently ignored.
+ * @note The terminal must support UTF-8 encoding for non-ASCII characters to display correctly.
  */
-void terminal_put_char(char c) {
-    putchar(c);
+void terminal_put_char(int32_t ch) {
+    unsigned char buf[5];
+    int len = 0;
+    if (ch < 0) return;
+    if (ch <= 0x7F) {
+        buf[0] = (unsigned char)ch;
+        len = 1;
+    } else if (ch <= 0x7FF) {
+        buf[0] = 0xC0 | (unsigned char)(ch >> 6);
+        buf[1] = 0x80 | (unsigned char)(ch & 0x3F);
+        len = 2;
+    } else if (ch <= 0xFFFF) {
+        buf[0] = 0xE0 | (unsigned char)(ch >> 12);
+        buf[1] = 0x80 | (unsigned char)((ch >> 6) & 0x3F);
+        buf[2] = 0x80 | (unsigned char)(ch & 0x3F);
+        len = 3;
+    } else if (ch <= 0x10FFFF) {
+        buf[0] = 0xF0 | (unsigned char)(ch >> 18);
+        buf[1] = 0x80 | (unsigned char)((ch >> 12) & 0x3F);
+        buf[2] = 0x80 | (unsigned char)((ch >> 6) & 0x3F);
+        buf[3] = 0x80 | (unsigned char)(ch & 0x3F);
+        len = 4;
+    } else {
+        return;
+    }
+    fwrite(buf, 1, len, stdout);
 }
 
 /**
