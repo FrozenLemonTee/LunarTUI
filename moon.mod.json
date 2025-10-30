@@ -1,18 +1,20 @@
 {
-  "name": "FrozenLemonTee/tui-rabbit",
+  "name": "FrozenLemonTee/LunarTUI",
   "version": "0.0.1",
   "deps": {
     "moonbitlang/x": "0.4.36",
     "Kaida-Amethyst/path": "0.1.1"
   },
   "readme": "README.md",
-  "repository": "https://github.com/FrozenLemonTee/tui-rabbit",
+  "repository": "https://github.com/FrozenLemonTee/LunarTUI",
   "license": "Apache-2.0",
   "keywords": [
     "cli",
     "tui",
+    "ui",
+    "terminal",
     "moonbit"
   ],
-  "description": "A package for cooking up terminal user interfaces (TUIs) written in language MoonBit",
+  "description": "A TUIs package written in MoonBit",
   "preferred-target": "native"
 }
