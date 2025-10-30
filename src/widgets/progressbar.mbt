@@ -88,23 +88,20 @@ pub impl @base.Widget for ProgressBar with height(self : ProgressBar) -> Int {
 }
 
 ///|
+fn ProgressBar::draw_bar(self : ProgressBar) -> String {
+  let filled_len = (self.value * self.length.to_double()).to_int()
+  let empty_len = self.length - filled_len
+  "[" + String::make(filled_len, '▇') + String::make(empty_len, ' ') + "]"
+}
+
+///|
 pub impl @base.Widget for ProgressBar with render(
   self : ProgressBar,
   frame : @base.Frame,
 ) -> Unit {
   let subframe = frame.subframe(self.left, self.top, self.width(), 1)
-  let filled_len = (self.value * self.length.to_double()).to_int()
-  let empty_len = self.length - filled_len
-  let mut bar = ""
-  bar += "["
-  for _ in 0..<filled_len {
-    bar += "█"
-  }
-  for _ in 0..<empty_len {
-    bar += " "
-  }
-  bar += "]"
-  let parts : Array[String] = []
+  let bar = self.draw_bar()
+  let components : Array[String] = []
   if !self.prefix.is_empty() {
     parts.push(self.prefix)
   }
