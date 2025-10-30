@@ -492,6 +492,7 @@ test "Image test - render from string and array" {
   @terminal.Terminal::newline()
 }
 
+///|
 test "ProgressBar test - render" {
   let area = @base.Area::new(80, 30)
   let block = @widgets.Block::from_section(
@@ -500,14 +501,35 @@ test "ProgressBar test - render" {
     layout=@layouts.FlexLayout::new(
       direction=Column,
       justify=SpaceEvenly,
-      align=Center,
+      align=Start,
     ),
   )
-  let p1 = @widgets.ProgressBar::new(20, value=0, prefix="p1", suffix="Initializing")
-  let p2 = @widgets.ProgressBar::new(20, value=0.25, prefix="p2", suffix="processing")
-  let p3 = @widgets.ProgressBar::new(20, value=0.5, prefix="p3", suffix="processing")
-  let p4 = @widgets.ProgressBar::new(20, value=0.75, prefix="p4", suffix="processing")
-  let p5 = @widgets.ProgressBar::new(20, value=1, prefix="p5", suffix="done")
+  let len = 50
+  let p1 = @widgets.ProgressBar::new(
+    len,
+    value=0,
+    prefix="p1",
+    suffix="Initializing",
+  )
+  let p2 = @widgets.ProgressBar::new(
+    len,
+    value=0.25,
+    prefix="p2",
+    suffix="processing",
+  )
+  let p3 = @widgets.ProgressBar::new(
+    len,
+    value=0.5,
+    prefix="p3",
+    suffix="processing",
+  )
+  let p4 = @widgets.ProgressBar::new(
+    len,
+    value=0.75,
+    prefix="p4",
+    suffix="processing",
+  )
+  let p5 = @widgets.ProgressBar::new(len, value=1, prefix="p5", suffix="done")
   block.add(p1)
   block.add(p2)
   block.add(p3)
