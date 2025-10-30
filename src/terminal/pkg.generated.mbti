@@ -1,0 +1,28 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "FrozenLemonTee/LunarTUI/src/terminal"
+
+import(
+  "FrozenLemonTee/LunarTUI/src/base"
+)
+
+// Values
+
+// Errors
+
+// Types and methods
+pub struct Terminal {
+  mut last : @base.Buffer
+  mut cur : @base.Buffer
+}
+fn Terminal::clear() -> Unit
+fn Terminal::draw(Self, &@base.Widget) -> Unit
+fn Terminal::flush() -> Unit
+fn Terminal::move_cursor(Int, Int) -> Unit
+fn Terminal::new(@base.Area) -> Self
+fn Terminal::newline() -> Unit
+fn Terminal::put_char(Char) -> Unit
+
+// Type aliases
+
+// Traits
+

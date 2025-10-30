@@ -1,0 +1,78 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "FrozenLemonTee/LunarTUI/src/base"
+
+// Values
+
+// Errors
+
+// Types and methods
+pub struct Area {
+  width : Int
+  height : Int
+}
+fn Area::equal(Self, Self) -> Bool // from trait `Eq`
+fn Area::new(Int, Int) -> Self
+#deprecated
+fn Area::op_equal(Self, Self) -> Bool // from trait `Eq`
+fn Area::size(Self) -> Int
+impl Eq for Area
+
+pub struct Buffer {
+  area : Area
+  contents : Array[Cell]
+}
+fn Buffer::diff(Self, Self) -> Iter[((Int, Int), (Cell, Cell))]
+fn Buffer::equal(Self, Self) -> Bool // from trait `Eq`
+fn Buffer::get_index(Self, Int, Int) -> Int
+fn Buffer::get_pos(Self, Int) -> (Int, Int)
+fn Buffer::height(Self) -> Int
+fn Buffer::new(Area) -> Self
+#deprecated
+fn Buffer::op_equal(Self, Self) -> Bool // from trait `Eq`
+fn Buffer::set_chars(Self, Int, Int, Char) -> Unit
+fn Buffer::width(Self) -> Int
+impl Eq for Buffer
+
+pub struct Cell {
+  mut char : Char
+}
+fn Cell::equal(Self, Self) -> Bool // from trait `Eq`
+#deprecated
+fn Cell::op_equal(Self, Self) -> Bool // from trait `Eq`
+impl Eq for Cell
+
+pub struct Frame {
+  buf : Buffer
+  section : Section
+}
+fn Frame::area(Self) -> Area
+fn Frame::new(Buffer, Section) -> Self
+fn Frame::set_chars(Self, Int, Int, Char) -> Unit
+fn Frame::subframe(Self, Int, Int, Int, Int) -> Self
+
+pub struct Section {
+  area : Area
+  left : Int
+  top : Int
+}
+fn Section::equal(Self, Self) -> Bool // from trait `Eq`
+fn Section::new(Area, Int, Int) -> Self
+#deprecated
+fn Section::op_equal(Self, Self) -> Bool // from trait `Eq`
+impl Eq for Section
+
+// Type aliases
+
+// Traits
+pub(open) trait Layout {
+  split(Self, Area, Array[&Widget]) -> Array[Section]
+  width(Self, Area, Array[&Widget]) -> Int
+  height(Self, Area, Array[&Widget]) -> Int
+}
+
+pub(open) trait Widget {
+  width(Self) -> Int
+  height(Self) -> Int
+  render(Self, Frame) -> Unit
+}
+

@@ -1,0 +1,85 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "FrozenLemonTee/LunarTUI/src/layouts"
+
+import(
+  "FrozenLemonTee/LunarTUI/src/base"
+)
+
+// Values
+
+// Errors
+
+// Types and methods
+pub(all) enum Align {
+  Start
+  Center
+  End
+}
+fn Align::equal(Self, Self) -> Bool // from trait `Eq`
+#deprecated
+fn Align::op_equal(Self, Self) -> Bool // from trait `Eq`
+impl Eq for Align
+
+pub(all) enum Direction {
+  Row
+  Column
+}
+fn Direction::equal(Self, Self) -> Bool // from trait `Eq`
+#deprecated
+fn Direction::op_equal(Self, Self) -> Bool // from trait `Eq`
+impl Eq for Direction
+
+pub(all) struct FlexLayout {
+  direction : Direction
+  justify : Justify
+  align : Align
+}
+fn FlexLayout::height(Self, @base.Area, Array[&@base.Widget]) -> Int // from trait `@base.Layout`
+fn FlexLayout::new(direction? : Direction, justify? : Justify, align? : Align) -> Self
+fn FlexLayout::split(Self, @base.Area, Array[&@base.Widget]) -> Array[@base.Section] // from trait `@base.Layout`
+fn FlexLayout::width(Self, @base.Area, Array[&@base.Widget]) -> Int // from trait `@base.Layout`
+impl @base.Layout for FlexLayout
+
+pub struct GridLayout {
+  rows : Int
+  cols : Int
+}
+fn GridLayout::height(Self, @base.Area, Array[&@base.Widget]) -> Int // from trait `@base.Layout`
+fn GridLayout::new(Int, Int) -> Self
+fn GridLayout::split(Self, @base.Area, Array[&@base.Widget]) -> Array[@base.Section] // from trait `@base.Layout`
+fn GridLayout::width(Self, @base.Area, Array[&@base.Widget]) -> Int // from trait `@base.Layout`
+impl @base.Layout for GridLayout
+
+pub struct HLayout {
+}
+fn HLayout::height(Self, @base.Area, Array[&@base.Widget]) -> Int // from trait `@base.Layout`
+fn HLayout::new() -> Self
+fn HLayout::split(Self, @base.Area, Array[&@base.Widget]) -> Array[@base.Section] // from trait `@base.Layout`
+fn HLayout::width(Self, @base.Area, Array[&@base.Widget]) -> Int // from trait `@base.Layout`
+impl @base.Layout for HLayout
+
+pub(all) enum Justify {
+  Start
+  Center
+  End
+  SpaceBetween
+  SpaceAround
+  SpaceEvenly
+}
+fn Justify::equal(Self, Self) -> Bool // from trait `Eq`
+#deprecated
+fn Justify::op_equal(Self, Self) -> Bool // from trait `Eq`
+impl Eq for Justify
+
+pub struct VLayout {
+}
+fn VLayout::height(Self, @base.Area, Array[&@base.Widget]) -> Int // from trait `@base.Layout`
+fn VLayout::new() -> Self
+fn VLayout::split(Self, @base.Area, Array[&@base.Widget]) -> Array[@base.Section] // from trait `@base.Layout`
+fn VLayout::width(Self, @base.Area, Array[&@base.Widget]) -> Int // from trait `@base.Layout`
+impl @base.Layout for VLayout
+
+// Type aliases
+
+// Traits
+

@@ -1,0 +1,135 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "FrozenLemonTee/LunarTUI/src/widgets"
+
+import(
+  "FrozenLemonTee/LunarTUI/src/base"
+)
+
+// Values
+
+// Errors
+
+// Types and methods
+pub(all) enum Align {
+  Left
+  Center
+  Right
+}
+
+pub struct Block {
+  mut title : String
+  section : @base.Section
+  container : Container
+}
+fn Block::add(Self, &@base.Widget) -> Unit
+fn Block::add_all(Self, Array[&@base.Widget]) -> Unit
+fn Block::from_section(@base.Section, title? : String, child? : &@base.Widget, layout? : &@base.Layout) -> Self
+fn Block::height(Self) -> Int // from trait `@base.Widget`
+fn Block::new(Int, Int, Int, Int, title? : String, child? : &@base.Widget, layout? : &@base.Layout) -> Self
+fn Block::render(Self, @base.Frame) -> Unit // from trait `@base.Widget`
+fn Block::set_title(Self, String) -> Unit
+fn Block::width(Self) -> Int // from trait `@base.Widget`
+impl @base.Widget for Block
+
+pub struct Container {
+  layout : &@base.Layout?
+  section : @base.Section
+  children : Array[&@base.Widget]
+}
+fn Container::add(Self, &@base.Widget) -> Unit
+fn Container::add_all(Self, Array[&@base.Widget]) -> Unit
+fn Container::from_section(layout? : &@base.Layout, @base.Section, children? : Array[&@base.Widget]) -> Self
+fn Container::height(Self) -> Int // from trait `@base.Widget`
+fn Container::new(Int, Int, Int, Int, layout? : &@base.Layout, children? : Array[&@base.Widget]) -> Self
+fn Container::render(Self, @base.Frame) -> Unit // from trait `@base.Widget`
+fn Container::width(Self) -> Int // from trait `@base.Widget`
+impl @base.Widget for Container
+
+pub(all) enum Direction {
+  Row
+  Column
+}
+
+pub struct Divider {
+  left : Int
+  top : Int
+  length : Int
+  line : Char
+  edge : Char
+  direction : Direction
+}
+fn Divider::height(Self) -> Int // from trait `@base.Widget`
+fn Divider::new(Int, left? : Int, top? : Int, line? : Char, edge? : Char, direction? : Direction) -> Self
+fn Divider::render(Self, @base.Frame) -> Unit // from trait `@base.Widget`
+fn Divider::width(Self) -> Int // from trait `@base.Widget`
+impl @base.Widget for Divider
+
+pub struct Image {
+  section : @base.Section
+  contents : Array[Char]
+}
+fn Image::from_file(String, left? : Int, top? : Int) -> Self
+fn Image::from_string(String, left? : Int, top? : Int) -> Self
+fn Image::height(Self) -> Int // from trait `@base.Widget`
+fn Image::new(Array[Char], Int, Int, left? : Int, top? : Int) -> Self
+fn Image::render(Self, @base.Frame) -> Unit // from trait `@base.Widget`
+fn Image::width(Self) -> Int // from trait `@base.Widget`
+impl @base.Widget for Image
+
+pub struct Label {
+  text : String
+  left : Int
+  top : Int
+}
+fn Label::height(Self) -> Int // from trait `@base.Widget`
+fn Label::new(String, left? : Int, top? : Int) -> Self
+fn Label::render(Self, @base.Frame) -> Unit // from trait `@base.Widget`
+fn Label::width(Self) -> Int // from trait `@base.Widget`
+impl @base.Widget for Label
+
+pub struct Paragraph {
+  text : String
+  align : Align
+  section : @base.Section
+}
+fn Paragraph::from_section(@base.Section, String, align? : Align) -> Self
+fn Paragraph::height(Self) -> Int // from trait `@base.Widget`
+fn Paragraph::new(Int, Int, Int, Int, String, align? : Align) -> Self
+fn Paragraph::render(Self, @base.Frame) -> Unit // from trait `@base.Widget`
+fn Paragraph::width(Self) -> Int // from trait `@base.Widget`
+impl @base.Widget for Paragraph
+
+pub struct ProgressBar {
+  mut value : Double
+  length : Int
+  left : Int
+  top : Int
+  mut prefix : String
+  mut suffix : String
+  mut mode : ShowMode
+}
+fn ProgressBar::height(Self) -> Int // from trait `@base.Widget`
+fn ProgressBar::new(Int, value? : Double, left? : Int, top? : Int, prefix? : String, suffix? : String, mode? : ShowMode) -> Self
+fn ProgressBar::render(Self, @base.Frame) -> Unit // from trait `@base.Widget`
+fn ProgressBar::set_mode(Self, ShowMode) -> Unit
+fn ProgressBar::set_prefix(Self, String) -> Unit
+fn ProgressBar::set_suffix(Self, String) -> Unit
+fn ProgressBar::set_value(Self, Double) -> Unit
+fn ProgressBar::value(Self) -> String
+fn ProgressBar::width(Self) -> Int // from trait `@base.Widget`
+impl @base.Widget for ProgressBar
+
+pub(all) enum ShowMode {
+  Percentage
+  Decimal
+  Null
+}
+fn ShowMode::equal(Self, Self) -> Bool // from trait `Eq`
+#deprecated
+fn ShowMode::op_equal(Self, Self) -> Bool // from trait `Eq`
+impl Eq for ShowMode
+
+// Type aliases
+
+// Traits
+
