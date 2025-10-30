@@ -1,12 +1,40 @@
 ///|
+/// A vertical layout that arranges widgets top-to-bottom with center alignment.
+///
+/// VLayout divides the available height equally among child widgets and centers
+/// each widget within its allocated cell. Widgets are constrained to fit within
+/// their allocated space.
 pub struct VLayout {}
 
 ///|
+/// Creates a new vertical layout manager.
+///
+/// # Returns
+/// A new VLayout instance ready to arrange widgets vertically.
+///
+/// # Examples
+/// ```moonbit
+/// let layout = VLayout::new()
+/// ```
 pub fn VLayout::new() -> VLayout {
   VLayout::{  }
 }
 
 ///|
+/// Splits the area vertically into equal sections for each child widget.
+///
+/// Each child widget is centered within its allocated cell. If a widget's
+/// preferred size is larger than the allocated cell, it will be constrained
+/// to fit within the cell boundaries.
+///
+/// # Parameters
+/// * `self`: The VLayout instance
+/// * `area`: The total available area to split among children
+/// * `children`: Array of references to child widgets to arrange vertically
+///
+/// # Returns
+/// An array of Sections, each defining the position and size for a child widget
+/// arranged from top to bottom.
 pub impl @base.Layout for VLayout with split(
   self : VLayout,
   area : @base.Area,
@@ -45,6 +73,18 @@ pub impl @base.Layout for VLayout with split(
 }
 
 ///|
+/// Calculates the preferred width for vertical layout with given children.
+///
+/// The width is the maximum of all children's preferred widths, constrained by
+/// the available area width.
+///
+/// # Parameters
+/// * `self`: The VLayout instance
+/// * `area`: The available area constraints
+/// * `children`: Array of references to child widgets
+///
+/// # Returns
+/// The minimum between the maximum child width and available area width.
 pub impl @base.Layout for VLayout with width(
   self : VLayout,
   area : @base.Area,
@@ -59,6 +99,18 @@ pub impl @base.Layout for VLayout with width(
 }
 
 ///|
+/// Calculates the preferred height for vertical layout with given children.
+///
+/// The height is the sum of all children's preferred heights, constrained by
+/// the available area height.
+///
+/// # Parameters
+/// * `self`: The VLayout instance
+/// * `area`: The available area constraints
+/// * `children`: Array of references to child widgets
+///
+/// # Returns
+/// The minimum between the total children height and available area height.
 pub impl @base.Layout for VLayout with height(
   self : VLayout,
   area : @base.Area,

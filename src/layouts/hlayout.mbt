@@ -1,12 +1,40 @@
 ///|
+/// A horizontal layout that arranges widgets left-to-right with center alignment.
+///
+/// HLayout divides the available width equally among child widgets and centers
+/// each widget within its allocated cell. Widgets are constrained to fit within
+/// their allocated space.
 pub struct HLayout {}
 
 ///|
+/// Creates a new horizontal layout manager.
+///
+/// # Returns
+/// A new HLayout instance ready to arrange widgets horizontally.
+///
+/// # Examples
+/// ```moonbit
+/// let layout = HLayout::new()
+/// ```
 pub fn HLayout::new() -> HLayout {
   HLayout::{  }
 }
 
 ///|
+/// Splits the area horizontally into equal sections for each child widget.
+///
+/// Each child widget is centered within its allocated cell. If a widget's
+/// preferred size is larger than the allocated cell, it will be constrained
+/// to fit within the cell boundaries.
+///
+/// # Parameters
+/// * `self`: The HLayout instance
+/// * `area`: The total available area to split among children
+/// * `children`: Array of references to child widgets to arrange horizontally
+///
+/// # Returns
+/// An array of Sections, each defining the position and size for a child widget
+/// arranged from left to right.
 pub impl @base.Layout for HLayout with split(
   self : HLayout,
   area : @base.Area,
@@ -45,6 +73,18 @@ pub impl @base.Layout for HLayout with split(
 }
 
 ///|
+/// Calculates the preferred width for horizontal layout with given children.
+///
+/// The width is the sum of all children's preferred widths, constrained by
+/// the available area width.
+///
+/// # Parameters
+/// * `self`: The HLayout instance
+/// * `area`: The available area constraints
+/// * `children`: Array of references to child widgets
+///
+/// # Returns
+/// The minimum between the total children width and available area width.
 pub impl @base.Layout for HLayout with width(
   self : HLayout,
   area : @base.Area,
@@ -59,6 +99,18 @@ pub impl @base.Layout for HLayout with width(
 }
 
 ///|
+/// Calculates the preferred height for horizontal layout with given children.
+///
+/// The height is the maximum of all children's preferred heights, constrained
+/// by the available area height.
+///
+/// # Parameters
+/// * `self`: The HLayout instance
+/// * `area`: The available area constraints
+/// * `children`: Array of references to child widgets
+///
+/// # Returns
+/// The minimum between the maximum child height and available area height.
 pub impl @base.Layout for HLayout with height(
   self : HLayout,
   area : @base.Area,
