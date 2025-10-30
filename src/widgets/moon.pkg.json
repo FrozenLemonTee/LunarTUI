@@ -1,6 +1,6 @@
 {
     "import" : [
-        "FrozenLemonTee/tui-rabbit/src/base",
+        "FrozenLemonTee/LunarTUI/src/base",
         "moonbitlang/x/fs"
     ]
 }

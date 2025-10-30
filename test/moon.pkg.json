@@ -1,9 +1,9 @@
 {
     "import" : [
-        "FrozenLemonTee/tui-rabbit/src/base",
-        "FrozenLemonTee/tui-rabbit/src/widgets",
-        "FrozenLemonTee/tui-rabbit/src/layouts",
-        "FrozenLemonTee/tui-rabbit/src/terminal",
+        "FrozenLemonTee/LunarTUI/src/base",
+        "FrozenLemonTee/LunarTUI/src/widgets",
+        "FrozenLemonTee/LunarTUI/src/layouts",
+        "FrozenLemonTee/LunarTUI/src/terminal",
         "Kaida-Amethyst/path"
     ]
 }
