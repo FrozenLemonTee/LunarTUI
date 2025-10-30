@@ -540,3 +540,51 @@ test "ProgressBar test - render" {
   ter.draw(block)
   @terminal.Terminal::newline()
 }
+
+///|
+test "Divider test - render row direction" {
+  let area = @base.Area::new(40, 40)
+  let block = @widgets.Block::from_section(
+    @base.Section::new(area, 0, 0),
+    title="Divider test",
+    layout=@layouts.FlexLayout::new(
+      direction=Column,
+      justify=SpaceEvenly,
+      align=Center,
+    ),
+  )
+  let dividers : Array[&@base.Widget] = []
+  for i in 0..<5 {
+    let d = @widgets.Divider::new(15)
+    dividers.push(d)
+  }
+  block.add_all(dividers)
+  @terminal.Terminal::clear()
+  let ter = @terminal.Terminal::new(area)
+  ter.draw(block)
+  @terminal.Terminal::newline()
+}
+
+///|
+test "Divider test - render column direction" {
+  let area = @base.Area::new(80, 20)
+  let block = @widgets.Block::from_section(
+    @base.Section::new(area, 0, 0),
+    title="Divider test",
+    layout=@layouts.FlexLayout::new(
+      direction=Row,
+      justify=SpaceEvenly,
+      align=Center,
+    ),
+  )
+  let dividers : Array[&@base.Widget] = []
+  for i in 0..<5 {
+    let d = @widgets.Divider::new(15, direction=Column)
+    dividers.push(d)
+  }
+  block.add_all(dividers)
+  @terminal.Terminal::clear()
+  let ter = @terminal.Terminal::new(area)
+  ter.draw(block)
+  @terminal.Terminal::newline()
+}
