@@ -1,1 +1,8 @@
-{}
+{
+  "test-import": [
+    "FrozenLemonTee/LunarTUI/src/terminal",
+    "FrozenLemonTee/LunarTUI/src/widgets",
+    "FrozenLemonTee/LunarTUI/src/base",
+    "FrozenLemonTee/LunarTUI/src/layouts"
+  ]
+}
