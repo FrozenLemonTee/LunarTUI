@@ -29,12 +29,18 @@
 ## 🚀 快速开始
 
 ### 安装依赖
-确保已安装 MoonBit 开发环境，然后在 `moon.mod` 文件中添加依赖：
+确保已安装 MoonBit 开发环境，在项目文件夹执行以下命令：
 
-```toml
-# moon.mod
-[dependencies]
-tui = "latest"
+```bash
+moon add FrozenLemonTee/LunarTUI
+```
+
+然后在 `moon.mod.json` 文件中添加依赖：
+
+```json
+"deps": {
+    "FrozenLemonTee/LunarTUI": "0.0.1",
+}
 ```
 
 ### 基础示例
@@ -43,14 +49,14 @@ tui = "latest"
 ///|
 test {
   // 创建组件
-  let title = @widgets.Label::new("欢迎使用 TUI 框架", left=2, top=1)
+  let title = @widgets.Label::new("Welcome to the LunarTUI framework", left=2, top=1)
   let progress = @widgets.ProgressBar::new(
     20,
     value=0.75,
     left=2,
     top=3,
-    prefix="加载进度:",
-    suffix="完成",
+    prefix="Loading progress:",
+    suffix="Complete",
   )
 
   // 创建带布局的容器
@@ -67,7 +73,9 @@ test {
   let terminal = @terminal.Terminal::new(@base.Area::new(80, 24))
 
   // 渲染界面
+  @terminal.Terminal::clear()
   terminal.draw(container)
+  @terminal.Terminal::newline()
 }
 ```
 
@@ -95,7 +103,9 @@ test {
     children=labels,
   )
   let terminal = @terminal.Terminal::new(@base.Area::new(80, 24))
+  @terminal.Terminal::clear()
   terminal.draw(container)
+  @terminal.Terminal::newline()
 }
 ```
 
@@ -117,7 +127,9 @@ test {
     children=labels,
   )
   let terminal = @terminal.Terminal::new(@base.Area::new(80, 24))
+  @terminal.Terminal::clear()
   terminal.draw(container)
+  @terminal.Terminal::newline()
 }
 ```
 
@@ -139,7 +151,9 @@ test {
     children=labels,
   )
   let terminal = @terminal.Terminal::new(@base.Area::new(80, 24))
+  @terminal.Terminal::clear()
   terminal.draw(container)
+  @terminal.Terminal::newline()
 }
 ```
 
@@ -165,7 +179,9 @@ test {
     children=labels,
   )
   let terminal = @terminal.Terminal::new(@base.Area::new(80, 24))
+  @terminal.Terminal::clear()
   terminal.draw(container)
+  @terminal.Terminal::newline()
 }
 ```
 
@@ -179,7 +195,9 @@ test {
 test {
   let label = @widgets.Label::new("Hello World", left=5, top=3)
   let terminal = @terminal.Terminal::new(@base.Area::new(80, 24))
+  @terminal.Terminal::clear()
   terminal.draw(label)
+  @terminal.Terminal::newline()
 }
 ```
 
@@ -187,10 +205,12 @@ test {
 ```moonbit
 ///|
 test {
-  let text = "这是一个多行文本段落，支持自动换行和对齐功能。"
+  let text = "This is a multi-line text paragraph that supports automatic line breaks and alignment features."
   let para = @widgets.Paragraph::new(2, 2, 40, 5, text, align=Center)
   let terminal = @terminal.Terminal::new(@base.Area::new(80, 24))
+  @terminal.Terminal::clear()
   terminal.draw(para)
+  @terminal.Terminal::newline()
 }
 ```
 
@@ -203,12 +223,14 @@ test {
     value=0.65,
     left=5,
     top=5,
-    prefix="处理中:",
+    prefix="Processing:",
     mode=Percentage,
   )
   progress.set_value(0.8) // 更新进度
   let terminal = @terminal.Terminal::new(@base.Area::new(80, 24))
+  @terminal.Terminal::clear()
   terminal.draw(progress)
+  @terminal.Terminal::newline()
 }
 ```
 
@@ -245,20 +267,20 @@ test {
   container.add(hdiv)
   container.add(vdiv)
   let ter = @terminal.Terminal::new(area)
+  @terminal.Terminal::clear()
   ter.draw(container)
+  @terminal.Terminal::newline()
 }
 ```
 
 ### 图像（Image）
 ```moonbit
 ///|
-test {
+test {  
+  let area = @base.Area::new(100, 50)
   // 从字符串创建
-  let ascii_art = " /\\n/  \\n\\  /\n \\/"
+  let ascii_art = " /\\\n/  \\\n\\  /\n \\/"
   let image1 = @widgets.Image::from_string(ascii_art, left=10, top=2)
-  // 从文件加载
-  let image2 = @widgets.Image::from_file("art/logo.txt", left=5, top=1)
-  let area = @base.Area::new(50, 50)
   let container = @widgets.Container::new(
     0,
     0,
@@ -267,9 +289,22 @@ test {
     layout=@layouts.VLayout::new(),
   )
   container.add(image1)
-  container.add(image2)
+  // 从文件加载
+  let cwd = @env.current_dir()
+  match cwd {
+    None => ()
+    Some(cwd) => {
+      let file_name = "test/ascii_pic.txt"
+      let file_dir = @path.Path::new(cwd)
+      file_dir.push(file_name)
+      let image2 = @widgets.Image::from_file(file_dir.to_string())
+      container.add(image2)
+    }
+  }
   let ter = @terminal.Terminal::new(area)
+  @terminal.Terminal::clear()
   ter.draw(container)
+  @terminal.Terminal::newline()
 }
 ```
 
@@ -279,11 +314,11 @@ test {
 test {
   let area = @base.Area::new(30, 12)
   let block = @widgets.Block::new(
-    5,
-    3,
+    0,
+    0,
     area.width,
     area.height,
-    title="设置面板",
+    title="Control Panel",
     layout=@layouts.VLayout::new(),
   )
   let l1 = @widgets.Label::new("l1")
@@ -293,7 +328,9 @@ test {
   block.add(d1)
   block.add(l2)
   let ter = @terminal.Terminal::new(area)
+  @terminal.Terminal::clear()
   ter.draw(block)
+  @terminal.Terminal::newline()
 }
 ```
 
