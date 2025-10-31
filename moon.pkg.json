@@ -3,6 +3,7 @@
     "FrozenLemonTee/LunarTUI/src/terminal",
     "FrozenLemonTee/LunarTUI/src/widgets",
     "FrozenLemonTee/LunarTUI/src/base",
-    "FrozenLemonTee/LunarTUI/src/layouts"
+    "FrozenLemonTee/LunarTUI/src/layouts",
+    "Kaida-Amethyst/path"
   ]
 }
