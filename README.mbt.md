@@ -49,7 +49,11 @@ moon add FrozenLemonTee/LunarTUI
 ///|
 test {
   // 创建组件
-  let title = @widgets.Label::new("Welcome to the LunarTUI framework", left=2, top=1)
+  let title = @widgets.Label::new(
+    "Welcome to the LunarTUI framework",
+    left=2,
+    top=1,
+  )
   let progress = @widgets.ProgressBar::new(
     20,
     value=0.75,
@@ -276,7 +280,7 @@ test {
 ### 图像（Image）
 ```moonbit
 ///|
-test {  
+test {
   let area = @base.Area::new(100, 50)
   // 从字符串创建
   let ascii_art = " /\\\n/  \\\n\\  /\n \\/"
@@ -420,17 +424,21 @@ pub impl @base.Layout for CustomLayout with height(
 
 ### Widget Trait
 ```moonbit
+///|
 pub(open) trait Widget {
   width(self : Self) -> Int
-  height(self : Self) -> Int  
+  height(self : Self) -> Int
   render(self : Self, frame : @base.Frame) -> Unit
 }
 ```
 
 ### Layout Trait
 ```moonbit
+///|
 pub(open) trait Layout {
-  split(self : Self, area : @base.Area, children : Array[&Widget]) -> Array[@base.Section]
+  split(self : Self, area : @base.Area, children : Array[&Widget]) -> Array[
+    @base.Section,
+  ]
   width(self : Self, area : @base.Area, children : Array[&Widget]) -> Int
   height(self : Self, area : @base.Area, children : Array[&Widget]) -> Int
 }

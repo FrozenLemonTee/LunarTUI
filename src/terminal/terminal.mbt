@@ -167,7 +167,7 @@ fn Terminal::swap(self : Terminal) -> Unit {
 /// # Efficiency
 /// By only updating changed characters, this method significantly reduces
 /// the amount of data sent to the terminal and improves rendering performance.
-fn apply(self : Terminal) -> Unit {
+fn Terminal::apply(self : Terminal) -> Unit {
   let diff = self.cur.diff(self.last)
   for item in diff {
     let (x, y) = item.0
