@@ -27,7 +27,7 @@ pub struct Label {
 /// # Examples
 /// ```moonbit
 /// let label1 = Label::new("Hello")           // Label at (0, 0)
-/// let label2 = Label::new("World", 2, 1)    // Label at (2, 1)
+/// let label2 = Label::new("World", left=2, top=1)    // Label at (2, 1)
 /// ```
 pub fn Label::new(text : String, left? : Int = 0, top? : Int = 0) -> Label {
   Label::{ text, left: @cmp.maximum(0, left), top: @cmp.maximum(0, top) }

@@ -103,7 +103,7 @@ pub fn ProgressBar::set_value(self : ProgressBar, value : Double) -> Unit {
 ///
 /// # Examples
 /// ```moonbit
-/// let pb = ProgressBar::new(20, 0.75)
+/// let pb = ProgressBar::new(20, value=0.75)
 /// pb.set_mode(ShowMode::Decimal)  // Now shows "0.75" instead of "75%"
 /// ```
 pub fn ProgressBar::set_mode(self : ProgressBar, mode : ShowMode) -> Unit {

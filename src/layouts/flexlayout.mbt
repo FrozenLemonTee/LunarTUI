@@ -70,7 +70,7 @@ pub(all) struct FlexLayout {
 /// # Examples
 /// ```moonbit
 /// let layout = FlexLayout::new()  // Default row layout
-/// let centered = FlexLayout::new(Direction::Column, Justify::Center, Align::Center)
+/// let centered = FlexLayout::new(direction=Column, justify=Center, align=Center)
 /// ```
 pub fn FlexLayout::new(
   direction? : Direction = Direction::Row,

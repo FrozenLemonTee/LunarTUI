@@ -42,7 +42,7 @@ pub struct Paragraph {
 ///
 /// # Examples
 /// ```moonbit
-/// let para = Paragraph::new(2, 3, 30, 5, "This is a long text that will wrap automatically.", Align::Center)
+/// let para = Paragraph::new(2, 3, 30, 5, "This is a long text that will wrap automatically.", align=Center)
 /// ```
 pub fn Paragraph::new(
   left : Int,
@@ -74,7 +74,7 @@ pub fn Paragraph::new(
 /// # Examples
 /// ```moonbit
 /// let section = @base.Section::new(@base.Area::new(40, 10), 5, 2)
-/// let para = Paragraph::from_section(section, "Pre-formatted text content", Align::Right)
+/// let para = Paragraph::from_section(section, "Pre-formatted text content", align=Right)
 /// ```
 pub fn Paragraph::from_section(
   section : @base.Section,

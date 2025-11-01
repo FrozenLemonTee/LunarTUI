@@ -19,12 +19,6 @@ pub struct Cell {
 ///
 /// # Returns
 /// A new Cell instance containing the specified character.
-///
-/// # Examples
-/// ```moonbit
-/// let empty_cell = Cell::new()      // Creates a cell with space
-/// let letter_a = Cell::new('A')    // Creates a cell with 'A'
-/// ```
 fn Cell::new(ch? : Char = ' ') -> Cell {
   Cell::{ char: ch }
 }
@@ -38,12 +32,6 @@ fn Cell::new(ch? : Char = ' ') -> Cell {
 ///
 /// # Returns
 /// Unit, indicating the operation is performed for side effects.
-///
-/// # Examples
-/// ```moonbit
-/// let cell = Cell::new('A')
-/// cell.set('B')  // Now the cell displays 'B'
-/// ```
 fn Cell::set(self : Cell, ch : Char) -> Unit {
   self.char = ch
 }

@@ -124,7 +124,7 @@ pub fn Image::from_file(
 /// # Examples
 /// ```moonbit
 /// let ascii_art = " /\\\n/  \\\n\\  /\n \\/"
-/// let img = Image::from_string(ascii_art, 2, 1)  // Creates a diamond shape
+/// let img = Image::from_string(ascii_art, left=2, top=1)  // Creates a diamond shape
 /// ```
 pub fn Image::from_string(
   text : String,

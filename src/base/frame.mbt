@@ -67,12 +67,6 @@ pub fn Frame::area(self : Frame) -> Area {
 ///
 /// # Returns
 /// Unit, indicating the operation is performed for side effects.
-///
-/// # Examples
-/// ```moonbit
-/// let frame = Frame::new(buffer, section)
-/// frame.set_chars(1, 2, 'X')  // Sets 'X' at frame-relative position (1,2)
-/// ```
 pub fn Frame::set_chars(self : Frame, left : Int, top : Int, ch : Char) -> Unit {
   if left < 0 || left >= self.section.area.width {
     return
@@ -100,12 +94,6 @@ pub fn Frame::set_chars(self : Frame, left : Int, top : Int, ch : Char) -> Unit 
 ///
 /// # Returns
 /// A new Frame representing the specified subsection of the parent frame.
-///
-/// # Examples
-/// ```moonbit
-/// let parent = Frame::new(buffer, Section::new(Area::new(10, 5), 0, 0))
-/// let child = parent.subframe(2, 1, 6, 3)  // Creates 6x3 frame at (2,1) relative to parent
-/// ```
 pub fn Frame::subframe(
   self : Frame,
   left : Int,
