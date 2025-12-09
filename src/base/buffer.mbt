@@ -22,7 +22,8 @@ pub struct Buffer {
 /// # Examples
 /// ```moonbit
 /// let area = Area::new(10, 5)
-/// let buffer = Buffer::new(area)  // Creates a 10x5 buffer
+///
+/// let buffer = Buffer::new(area) // Creates a 10x5 buffer
 /// ```
 pub fn Buffer::new(area : Area) -> Buffer {
   let contents = Array::default()

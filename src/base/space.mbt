@@ -22,8 +22,9 @@ pub struct Area {
 ///
 /// # Examples
 /// ```moonbit
-/// let valid_area = Area::new(10, 5)    // Creates 10x5 area
-/// let clamped_area = Area::new(-5, 3)  // Creates 0x3 area (negative width clamped)
+/// let valid_area = Area::new(10, 5) // Creates 10x5 area
+///
+/// let clamped_area = Area::new(-5, 3) // Creates 0x3 area (negative width clamped)
 /// ```
 pub fn Area::new(width : Int, height : Int) -> Area {
   Area::{ width: @cmp.maximum(0, width), height: @cmp.maximum(0, height) }
@@ -41,7 +42,8 @@ pub fn Area::new(width : Int, height : Int) -> Area {
 /// # Examples
 /// ```moonbit
 /// let area = Area::new(10, 5)
-/// let size = area.size()  // Returns 50
+///
+/// let size = area.size() // Returns 50
 /// ```
 pub fn Area::size(self : Area) -> Int {
   self.width * self.height
@@ -75,8 +77,10 @@ pub struct Section {
 /// # Examples
 /// ```moonbit
 /// let area = Area::new(8, 4)
-/// let section = Section::new(area, 2, 1)    // Section at position (2,1)
-/// let clamped = Section::new(area, -1, 3)   // Section at position (0,3)
+///
+/// let section = Section::new(area, 2, 1) // Section at position (2,1)
+///
+/// let clamped = Section::new(area, -1, 3) // Section at position (0,3)
 /// ```
 pub fn Section::new(area : Area, left : Int, top : Int) -> Section {
   Section::{ area, left: @cmp.maximum(0, left), top: @cmp.maximum(0, top) }

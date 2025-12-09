@@ -26,8 +26,9 @@ pub struct Label {
 ///
 /// # Examples
 /// ```moonbit
-/// let label1 = Label::new("Hello")           // Label at (0, 0)
-/// let label2 = Label::new("World", left=2, top=1)    // Label at (2, 1)
+/// let label1 = Label::new("Hello") // Label at (0, 0)
+///
+/// let label2 = Label::new("World", left=2, top=1) // Label at (2, 1)
 /// ```
 pub fn Label::new(text : String, left? : Int = 0, top? : Int = 0) -> Label {
   Label::{ text, left: @cmp.maximum(0, left), top: @cmp.maximum(0, top) }
@@ -47,7 +48,8 @@ pub fn Label::new(text : String, left? : Int = 0, top? : Int = 0) -> Label {
 /// # Examples
 /// ```moonbit
 /// let label = Label::new("Hello")
-/// let w = label.width()  // Returns 5
+///
+/// let w = label.width() // Returns 5
 /// ```
 pub impl @base.Widget for Label with width(self : Label) -> Int {
   self.text.length()
@@ -67,7 +69,8 @@ pub impl @base.Widget for Label with width(self : Label) -> Int {
 /// # Examples
 /// ```moonbit
 /// let label = Label::new("Hello")
-/// let h = label.height()  // Returns 1
+///
+/// let h = label.height() // Returns 1
 /// ```
 pub impl @base.Widget for Label with height(self : Label) -> Int {
   ignore(self) // NOLINT

@@ -23,7 +23,7 @@ pub struct GridLayout {
 ///
 /// # Examples
 /// ```moonbit
-/// let layout = GridLayout::new(2, 3)  // Creates a 2x3 grid
+/// let layout = GridLayout::new(2, 3) // Creates a 2x3 grid
 /// ```
 pub fn GridLayout::new(rows : Int, cols : Int) -> GridLayout {
   GridLayout::{ rows: @cmp.maximum(0, rows), cols: @cmp.maximum(0, cols) }

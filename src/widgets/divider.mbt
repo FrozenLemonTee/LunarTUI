@@ -77,10 +77,12 @@ pub fn Divider::new(
 /// # Examples
 /// ```moonbit
 /// let hdiv = Divider::new(15, direction=Direction::Row)
-/// let w = hdiv.width()  // Returns 15
-/// 
+///
+/// let w = hdiv.width() // Returns 15
+///
 /// let vdiv = Divider::new(10, direction=Direction::Column)
-/// let w = vdiv.width()  // Returns 1
+///
+/// let w = vdiv.width() // Returns 1
 /// ```
 pub impl @base.Widget for Divider with width(self : Divider) -> Int {
   match self.direction {
@@ -104,10 +106,12 @@ pub impl @base.Widget for Divider with width(self : Divider) -> Int {
 /// # Examples
 /// ```moonbit
 /// let hdiv = Divider::new(15, direction=Direction::Row)
-/// let h = hdiv.height()  // Returns 1
-/// 
+///
+/// let h = hdiv.height() // Returns 1
+///
 /// let vdiv = Divider::new(10, direction=Direction::Column)
-/// let h = vdiv.height()  // Returns 10
+///
+/// let h = vdiv.height() // Returns 10
 /// ```
 pub impl @base.Widget for Divider with height(self : Divider) -> Int {
   match self.direction {
