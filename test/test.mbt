@@ -554,7 +554,7 @@ test "Divider test - render row direction" {
     ),
   )
   let dividers : Array[&@base.Widget] = []
-  for i in 0..<5 {
+  for _ in 0..<5 {
     let d = @widgets.Divider::new(15)
     dividers.push(d)
   }
@@ -578,7 +578,7 @@ test "Divider test - render column direction" {
     ),
   )
   let dividers : Array[&@base.Widget] = []
-  for i in 0..<5 {
+  for _ in 0..<5 {
     let d = @widgets.Divider::new(15, direction=Column)
     dividers.push(d)
   }
