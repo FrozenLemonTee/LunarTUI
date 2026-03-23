@@ -5,5 +5,6 @@
         "FrozenLemonTee/LunarTUI/src/layouts",
         "FrozenLemonTee/LunarTUI/src/terminal",
         "Kaida-Amethyst/path"
-    ]
+    ],
+    "supported-targets" : "native"
 }
