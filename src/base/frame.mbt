@@ -25,8 +25,10 @@ pub struct Frame {
 /// # Examples
 /// ```moonbit
 /// let buffer = Buffer::new(Area::new(20, 10))
+///
 /// let section = Section::new(Area::new(5, 3), 2, 1)
-/// let frame = Frame::new(buffer, section)  // Creates 5x3 frame at (2,1)
+///
+/// let frame = Frame::new(buffer, section) // Creates 5x3 frame at (2,1)
 /// ```
 pub fn Frame::new(buf : Buffer, section : Section) -> Frame {
   let (left, top) = (

@@ -42,7 +42,14 @@ pub struct Paragraph {
 ///
 /// # Examples
 /// ```moonbit
-/// let para = Paragraph::new(2, 3, 30, 5, "This is a long text that will wrap automatically.", align=Center)
+/// let para = Paragraph::new(
+///   2,
+///   3,
+///   30,
+///   5,
+///   "This is a long text that will wrap automatically.",
+///   align=Center,
+/// )
 /// ```
 pub fn Paragraph::new(
   left : Int,
@@ -74,7 +81,12 @@ pub fn Paragraph::new(
 /// # Examples
 /// ```moonbit
 /// let section = @base.Section::new(@base.Area::new(40, 10), 5, 2)
-/// let para = Paragraph::from_section(section, "Pre-formatted text content", align=Right)
+///
+/// let para = Paragraph::from_section(
+///   section,
+///   "Pre-formatted text content",
+///   align=Right,
+/// )
 /// ```
 pub fn Paragraph::from_section(
   section : @base.Section,
@@ -131,9 +143,9 @@ fn Paragraph::indices(self : Paragraph) -> Array[Int] {
   let line_starts = [0]
   let mut count = 0
   for i in 0..<text.length() {
-    let ch = text[i]
+    let ch = text.code_unit_at(i)
     count += 1
-    if ch == '\n' {
+    if ch == 10 {
       line_starts.push(i + 1)
       count = 0
     } else if count >= width {

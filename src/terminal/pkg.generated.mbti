@@ -14,13 +14,13 @@ pub struct Terminal {
   mut last : @base.Buffer
   mut cur : @base.Buffer
 }
-fn Terminal::clear() -> Unit
-fn Terminal::draw(Self, &@base.Widget) -> Unit
-fn Terminal::flush() -> Unit
-fn Terminal::move_cursor(Int, Int) -> Unit
-fn Terminal::new(@base.Area) -> Self
-fn Terminal::newline() -> Unit
-fn Terminal::put_char(Char) -> Unit
+pub fn Terminal::clear() -> Unit
+pub fn Terminal::draw(Self, &@base.Widget) -> Unit
+pub fn Terminal::flush() -> Unit
+pub fn Terminal::move_cursor(Int, Int) -> Unit
+pub fn Terminal::new(@base.Area) -> Self
+pub fn Terminal::newline() -> Unit
+pub fn Terminal::put_char(Char) -> Unit
 
 // Type aliases
 

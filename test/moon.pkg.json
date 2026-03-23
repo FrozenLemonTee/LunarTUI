@@ -4,6 +4,8 @@
         "FrozenLemonTee/LunarTUI/src/widgets",
         "FrozenLemonTee/LunarTUI/src/layouts",
         "FrozenLemonTee/LunarTUI/src/terminal",
-        "Kaida-Amethyst/path"
-    ]
+        "Kaida-Amethyst/path",
+        "moonbitlang/core/env"
+    ],
+    "supported-targets" : "native"
 }
