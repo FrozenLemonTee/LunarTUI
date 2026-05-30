@@ -86,4 +86,11 @@ pub(open) trait Widget {
   /// # Returns
   /// Unit, indicating the rendering operation is complete.
   render(self : Self, frame : Frame) -> Unit
+
+  /// Handles an input event for the widget.
+  ///
+  /// Widgets that do not participate in interaction can return `Ignored`.
+  /// Interactive widgets can update internal state and return `Handled` or
+  /// `Redraw` depending on whether the caller should repaint.
+  handle_event(self : Self, event : Event) -> EventResult
 }
