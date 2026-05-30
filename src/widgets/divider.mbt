@@ -153,3 +153,10 @@ pub impl @base.Widget for Divider with render(
     }
   }
 }
+
+pub impl @base.Widget for Divider with handle_event(
+  self : Divider,
+  event : @base.Event,
+) -> @base.EventResult {
+  @base.EventResult::Ignored
+}

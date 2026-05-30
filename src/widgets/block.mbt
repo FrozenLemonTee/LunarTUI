@@ -247,3 +247,10 @@ pub impl @base.Widget for Block with render(self : Block, frame : @base.Frame) -
   self.draw_title(subframe)
   self.draw_children(subframe)
 }
+
+pub impl @base.Widget for Block with handle_event(
+  self : Block,
+  event : @base.Event,
+) -> @base.EventResult {
+  self.container.handle_event(event)
+}

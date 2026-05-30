@@ -165,3 +165,24 @@ pub impl @base.Widget for Container with render(
     }
   }
 }
+
+pub impl @base.Widget for Container with handle_event(
+  self : Container,
+  event : @base.Event,
+) -> @base.EventResult {
+  let mut result = @base.EventResult::Ignored
+  for child in self.children {
+    match child.handle_event(event) {
+      @base.EventResult::Ignored => ()
+      @base.EventResult::Handled => {
+        result = @base.EventResult::Handled
+        break
+      }
+      @base.EventResult::Redraw => {
+        result = @base.EventResult::Redraw
+        break
+      }
+    }
+  }
+  result
+}

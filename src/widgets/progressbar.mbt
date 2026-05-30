@@ -253,3 +253,10 @@ pub impl @base.Widget for ProgressBar with render(
     subframe.set_chars(i, 0, ch)
   }
 }
+
+pub impl @base.Widget for ProgressBar with handle_event(
+  self : ProgressBar,
+  event : @base.Event,
+) -> @base.EventResult {
+  @base.EventResult::Ignored
+}
