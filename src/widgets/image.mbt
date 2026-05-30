@@ -12,6 +12,37 @@ pub struct Image {
 }
 
 ///|
+fn Image::from_text(text : String, left : Int, top : Int) -> Image {
+  let lines : Array[Array[Char]] = []
+  let mut line : Array[Char] = []
+  let mut width = 0
+  for _, ch in text.iter2() {
+    if ch == '\n' {
+      width = @cmp.maximum(width, line.length())
+      lines.push(line)
+      line = []
+    } else if ch != '\r' {
+      line.push(ch)
+    }
+  }
+  width = @cmp.maximum(width, line.length())
+  lines.push(line)
+  let height = lines.length()
+  let contents : Array[Char] = []
+  for line in lines.iter() {
+    contents.append(line)
+    let remain = width - line.length()
+    for _ in 0..<remain {
+      contents.push(' ')
+    }
+  }
+  Image::{
+    section: @base.Section::new(@base.Area::new(width, height), left, top),
+    contents,
+  }
+}
+
+///|
 /// Creates a new Image from a character array with specified dimensions.
 ///
 /// # Parameters
@@ -78,25 +109,7 @@ pub fn Image::from_file(
   }
   try {
     let file_contents = @fs.read_file_to_string(path)
-    let lines = file_contents.split("\n")
-    let height = lines.count()
-    let width = lines
-      .map(fn(line) -> Int { line.length() })
-      .fold(init=0, fn(max, cur) { @cmp.maximum(max, cur) })
-    let contents : Array[Char] = []
-    for line in lines.iter() {
-      for ch in line.iter() {
-        contents.push(ch)
-      }
-      let remain = width - line.length()
-      for _ in 0..<remain {
-        contents.push(' ')
-      }
-    }
-    Image::{
-      section: @base.Section::new(@base.Area::new(width, height), left, top),
-      contents,
-    }
+    Image::from_text(file_contents, left, top)
   } catch {
     @fs.IOError(path) => abort("IOError raised when reading file '\{path}'.")
   }
@@ -132,25 +145,7 @@ pub fn Image::from_string(
   left? : Int = 0,
   top? : Int = 0,
 ) -> Image {
-  let lines = text.split("\n")
-  let height = lines.count()
-  let width = lines
-    .map(fn(line) -> Int { line.length() })
-    .fold(init=0, fn(max, cur) { @cmp.maximum(max, cur) })
-  let contents : Array[Char] = []
-  for line in lines.iter() {
-    for ch in line.iter() {
-      contents.push(ch)
-    }
-    let remain = width - line.length()
-    for _ in 0..<remain {
-      contents.push(' ')
-    }
-  }
-  Image::{
-    section: @base.Section::new(@base.Area::new(width, height), left, top),
-    contents,
-  }
+  Image::from_text(text, left, top)
 }
 
 ///|
