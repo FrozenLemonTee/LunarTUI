@@ -71,8 +71,56 @@ pub(all) struct Modifiers {
 
 ///|
 /// Creates a modifier set with all modifiers disabled.
-pub fn Modifiers::new() -> Modifiers {
-  Modifiers::{ shift: false, ctrl: false, alt: false, meta: false }
+pub fn Modifiers::new(
+  shift? : Bool = false,
+  ctrl? : Bool = false,
+  alt? : Bool = false,
+  meta? : Bool = false,
+) -> Modifiers {
+  Modifiers::{ shift, ctrl, alt, meta }
+}
+
+///|
+/// Creates a keyboard event.
+pub fn KeyEvent::new(
+  state : KeyState,
+  code : KeyCode,
+  text? : String? = None,
+  modifiers? : Modifiers = Modifiers::new(),
+  repeat_count? : Int = 1,
+) -> KeyEvent {
+  KeyEvent::{ state, code, text, modifiers, repeat_count }
+}
+
+///|
+/// Creates a mouse event.
+pub fn MouseEvent::new(
+  state : MouseState,
+  x : Int,
+  y : Int,
+  button? : MouseButton? = None,
+  scroll? : ScrollDirection? = None,
+  modifiers? : Modifiers = Modifiers::new(),
+) -> MouseEvent {
+  MouseEvent::{ state, button, scroll, x, y, modifiers }
+}
+
+///|
+/// Creates a resize event.
+pub fn ResizeEvent::new(width : Int, height : Int) -> ResizeEvent {
+  ResizeEvent::{ width, height }
+}
+
+///|
+/// Creates a focus event.
+pub fn FocusEvent::new(state : FocusState) -> FocusEvent {
+  FocusEvent::{ state }
+}
+
+///|
+/// Creates a text input event.
+pub fn TextInputEvent::new(text : String) -> TextInputEvent {
+  TextInputEvent::{ text }
 }
 
 ///|
