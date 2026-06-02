@@ -6,6 +6,14 @@
 extern "c" fn terminal_clear() -> Unit = "terminal_clear"
 
 ///|
+/// Hides the terminal's hardware cursor.
+extern "c" fn terminal_hide_cursor() -> Unit = "terminal_hide_cursor"
+
+///|
+/// Shows the terminal's hardware cursor.
+extern "c" fn terminal_show_cursor() -> Unit = "terminal_show_cursor"
+
+///|
 /// Moves the terminal cursor to the specified position.
 /// 
 /// Uses ANSI escape codes to position the cursor at (x, y) coordinates.
@@ -75,6 +83,18 @@ pub fn Terminal::clear() -> Unit {
 }
 
 ///|
+/// Hides the terminal's hardware cursor.
+pub fn Terminal::hide_cursor() -> Unit {
+  terminal_hide_cursor()
+}
+
+///|
+/// Shows the terminal's hardware cursor.
+pub fn Terminal::show_cursor() -> Unit {
+  terminal_show_cursor()
+}
+
+///|
 /// Moves the terminal cursor to the specified position.
 /// 
 /// # Parameters
@@ -133,13 +153,11 @@ pub fn Terminal::new(area : @base.Area) -> Terminal {
 /// Only changed characters are sent to the terminal, minimizing flickering and
 /// improving rendering performance for complex UI updates.
 pub fn Terminal::draw(self : Terminal, widget : &@base.Widget) -> Unit {
+  let area = @base.Area::new(self.cur.width(), self.cur.height())
+  self.cur = @base.Buffer::new(area)
   let frame = @base.Frame::new(
     self.cur,
-    @base.Section::new(
-      @base.Area::new(self.cur.width(), self.cur.height()),
-      0,
-      0,
-    ),
+    @base.Section::new(area, 0, 0),
   )
   widget.render(frame)
   self.cur = frame.buf
