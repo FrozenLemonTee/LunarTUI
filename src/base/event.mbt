@@ -114,13 +114,13 @@ pub fn ResizeEvent::new(width : Int, height : Int) -> ResizeEvent {
 ///|
 /// Creates a focus event.
 pub fn FocusEvent::new(state : FocusState) -> FocusEvent {
-  FocusEvent::{ state }
+  FocusEvent::{ state, }
 }
 
 ///|
 /// Creates a text input event.
 pub fn TextInputEvent::new(text : String) -> TextInputEvent {
-  TextInputEvent::{ text }
+  TextInputEvent::{ text, }
 }
 
 ///|

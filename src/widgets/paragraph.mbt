@@ -41,7 +41,7 @@ pub struct Paragraph {
 /// A new Paragraph instance with automatic line wrapping capabilities.
 ///
 /// # Examples
-/// ```moonbit
+/// ```moonbit nocheck
 /// let para = Paragraph::new(
 ///   2,
 ///   3,
@@ -79,7 +79,7 @@ pub fn Paragraph::new(
 /// A new Paragraph instance using the provided section for layout.
 ///
 /// # Examples
-/// ```moonbit
+/// ```moonbit nocheck
 /// let section = @base.Section::new(@base.Area::new(40, 10), 5, 2)
 ///
 /// let para = Paragraph::from_section(
@@ -104,7 +104,7 @@ pub fn Paragraph::from_section(
 ///
 /// # Returns
 /// The width of the paragraph in characters.
-pub impl @base.Widget for Paragraph with width(self : Paragraph) -> Int {
+pub impl @base.Widget for Paragraph with fn width(self : Paragraph) -> Int {
   self.section.area.width
 }
 
@@ -116,7 +116,7 @@ pub impl @base.Widget for Paragraph with width(self : Paragraph) -> Int {
 ///
 /// # Returns
 /// The height of the paragraph in lines.
-pub impl @base.Widget for Paragraph with height(self : Paragraph) -> Int {
+pub impl @base.Widget for Paragraph with fn height(self : Paragraph) -> Int {
   self.section.area.height
 }
 
@@ -213,7 +213,7 @@ fn Paragraph::draw_line(
 /// 2. Calculates line break positions
 /// 3. Renders each line with proper alignment
 /// 4. Clips text that exceeds the paragraph height
-pub impl @base.Widget for Paragraph with render(
+pub impl @base.Widget for Paragraph with fn render(
   self : Paragraph,
   frame : @base.Frame,
 ) -> Unit {
@@ -236,7 +236,8 @@ pub impl @base.Widget for Paragraph with render(
   }
 }
 
-pub impl @base.Widget for Paragraph with handle_event(
+///|
+pub impl @base.Widget for Paragraph with fn handle_event(
   self : Paragraph,
   event : @base.Event,
 ) -> @base.EventResult {

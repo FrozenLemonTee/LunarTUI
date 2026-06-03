@@ -209,7 +209,7 @@ fn Block::draw_children(self : Block, frame : @base.Frame) -> Unit {
 ///
 /// # Returns
 /// The total width of the block in characters including border characters.
-pub impl @base.Widget for Block with width(self : Block) -> Int {
+pub impl @base.Widget for Block with fn width(self : Block) -> Int {
   self.section.area.width
 }
 
@@ -221,7 +221,7 @@ pub impl @base.Widget for Block with width(self : Block) -> Int {
 ///
 /// # Returns
 /// The total height of the block in character rows including border rows.
-pub impl @base.Widget for Block with height(self : Block) -> Int {
+pub impl @base.Widget for Block with fn height(self : Block) -> Int {
   self.section.area.height
 }
 
@@ -236,7 +236,10 @@ pub impl @base.Widget for Block with height(self : Block) -> Int {
 /// # Parameters
 /// * `self`: The Block instance
 /// * `frame`: The parent frame to render into
-pub impl @base.Widget for Block with render(self : Block, frame : @base.Frame) -> Unit {
+pub impl @base.Widget for Block with fn render(
+  self : Block,
+  frame : @base.Frame,
+) -> Unit {
   let subframe = frame.subframe(
     self.section.left,
     self.section.top,
@@ -248,7 +251,8 @@ pub impl @base.Widget for Block with render(self : Block, frame : @base.Frame) -
   self.draw_children(subframe)
 }
 
-pub impl @base.Widget for Block with handle_event(
+///|
+pub impl @base.Widget for Block with fn handle_event(
   self : Block,
   event : @base.Event,
 ) -> @base.EventResult {

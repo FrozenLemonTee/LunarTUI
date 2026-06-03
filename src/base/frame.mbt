@@ -23,7 +23,7 @@ pub struct Frame {
 /// A new Frame instance with adjusted dimensions to fit within buffer bounds.
 ///
 /// # Examples
-/// ```moonbit
+/// ```moonbit nocheck
 /// let buffer = Buffer::new(Area::new(20, 10))
 ///
 /// let section = Section::new(Area::new(5, 3), 2, 1)

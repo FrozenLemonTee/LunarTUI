@@ -21,7 +21,9 @@ pub(open) trait Layout {
   /// let sections = layout.split(Area::new(100, 20), [&button1, &button2])
   /// // Returns sections for two buttons arranged horizontally
   /// ```
-  split(self : Self, area : Area, children : Array[&Widget]) -> Array[Section]
+  fn split(self : Self, area : Area, children : Array[&Widget]) -> Array[
+    Section,
+  ]
 
   /// Calculates the preferred width for this layout with given children.
   ///
@@ -32,7 +34,7 @@ pub(open) trait Layout {
   ///
   /// # Returns
   /// The preferred width in characters that this layout would occupy.
-  width(self : Self, area : Area, children : Array[&Widget]) -> Int
+  fn width(self : Self, area : Area, children : Array[&Widget]) -> Int
 
   /// Calculates the preferred height for this layout with given children.
   ///
@@ -43,7 +45,7 @@ pub(open) trait Layout {
   ///
   /// # Returns
   /// The preferred height in character rows that this layout would occupy.
-  height(self : Self, area : Area, children : Array[&Widget]) -> Int
+  fn height(self : Self, area : Area, children : Array[&Widget]) -> Int
 }
 
 ///|
@@ -62,7 +64,7 @@ pub(open) trait Widget {
   ///
   /// # Note
   /// The actual rendered width may be different due to layout constraints.
-  width(self : Self) -> Int
+  fn width(self : Self) -> Int
 
   /// Gets the preferred height of the widget.
   ///
@@ -74,7 +76,7 @@ pub(open) trait Widget {
   ///
   /// # Note
   /// The actual rendered height may be different due to layout constraints.
-  height(self : Self) -> Int
+  fn height(self : Self) -> Int
 
   /// Renders the widget's content into the provided frame.
   ///
@@ -85,12 +87,12 @@ pub(open) trait Widget {
   ///
   /// # Returns
   /// Unit, indicating the rendering operation is complete.
-  render(self : Self, frame : Frame) -> Unit
+  fn render(self : Self, frame : Frame) -> Unit
 
   /// Handles an input event for the widget.
   ///
   /// Widgets that do not participate in interaction can return `Ignored`.
   /// Interactive widgets can update internal state and return `Handled` or
   /// `Redraw` depending on whether the caller should repaint.
-  handle_event(self : Self, event : Event) -> EventResult
+  fn handle_event(self : Self, event : Event) -> EventResult
 }

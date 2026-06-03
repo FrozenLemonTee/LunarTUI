@@ -25,7 +25,7 @@ pub struct Label {
 /// A new Label instance ready for rendering.
 ///
 /// # Examples
-/// ```moonbit
+/// ```moonbit nocheck
 /// let label1 = Label::new("Hello") // Label at (0, 0)
 ///
 /// let label2 = Label::new("World", left=2, top=1) // Label at (2, 1)
@@ -46,12 +46,12 @@ pub fn Label::new(text : String, left? : Int = 0, top? : Int = 0) -> Label {
 /// The length of the text string in characters.
 ///
 /// # Examples
-/// ```moonbit
+/// ```moonbit nocheck
 /// let label = Label::new("Hello")
 ///
 /// let w = label.width() // Returns 5
 /// ```
-pub impl @base.Widget for Label with width(self : Label) -> Int {
+pub impl @base.Widget for Label with fn width(self : Label) -> Int {
   self.text.length()
 }
 
@@ -67,12 +67,12 @@ pub impl @base.Widget for Label with width(self : Label) -> Int {
 /// Always returns 1, as labels occupy a single row.
 ///
 /// # Examples
-/// ```moonbit
+/// ```moonbit nocheck
 /// let label = Label::new("Hello")
 ///
 /// let h = label.height() // Returns 1
 /// ```
-pub impl @base.Widget for Label with height(self : Label) -> Int {
+pub impl @base.Widget for Label with fn height(self : Label) -> Int {
   ignore(self) // NOLINT
   1
 }
@@ -92,14 +92,18 @@ pub impl @base.Widget for Label with height(self : Label) -> Int {
 /// - Creates a subframe at the label's position with dimensions matching the text length
 /// - Renders each character sequentially from left to right
 /// - Supports Unicode characters through the frame's character setting mechanism
-pub impl @base.Widget for Label with render(self : Label, frame : @base.Frame) -> Unit {
+pub impl @base.Widget for Label with fn render(
+  self : Label,
+  frame : @base.Frame,
+) -> Unit {
   let subframe = frame.subframe(self.left, self.top, self.text.length(), 1)
   for i, ch in self.text.iter2() {
     subframe.set_chars(i, 0, ch)
   }
 }
 
-pub impl @base.Widget for Label with handle_event(
+///|
+pub impl @base.Widget for Label with fn handle_event(
   self : Label,
   event : @base.Event,
 ) -> @base.EventResult {

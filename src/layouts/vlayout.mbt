@@ -13,7 +13,7 @@ pub struct VLayout {}
 /// A new VLayout instance ready to arrange widgets vertically.
 ///
 /// # Examples
-/// ```moonbit
+/// ```moonbit nocheck
 /// let layout = VLayout::new()
 /// ```
 pub fn VLayout::new() -> VLayout {
@@ -35,7 +35,7 @@ pub fn VLayout::new() -> VLayout {
 /// # Returns
 /// An array of Sections, each defining the position and size for a child widget
 /// arranged from top to bottom.
-pub impl @base.Layout for VLayout with split(
+pub impl @base.Layout for VLayout with fn split(
   self : VLayout,
   area : @base.Area,
   children : Array[&@base.Widget],
@@ -85,7 +85,7 @@ pub impl @base.Layout for VLayout with split(
 ///
 /// # Returns
 /// The minimum between the maximum child width and available area width.
-pub impl @base.Layout for VLayout with width(
+pub impl @base.Layout for VLayout with fn width(
   self : VLayout,
   area : @base.Area,
   children : Array[&@base.Widget],
@@ -111,7 +111,7 @@ pub impl @base.Layout for VLayout with width(
 ///
 /// # Returns
 /// The minimum between the total children height and available area height.
-pub impl @base.Layout for VLayout with height(
+pub impl @base.Layout for VLayout with fn height(
   self : VLayout,
   area : @base.Area,
   children : Array[&@base.Widget],

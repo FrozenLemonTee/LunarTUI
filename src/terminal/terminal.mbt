@@ -155,10 +155,7 @@ pub fn Terminal::new(area : @base.Area) -> Terminal {
 pub fn Terminal::draw(self : Terminal, widget : &@base.Widget) -> Unit {
   let area = @base.Area::new(self.cur.width(), self.cur.height())
   self.cur = @base.Buffer::new(area)
-  let frame = @base.Frame::new(
-    self.cur,
-    @base.Section::new(area, 0, 0),
-  )
+  let frame = @base.Frame::new(self.cur, @base.Section::new(area, 0, 0))
   widget.render(frame)
   self.cur = frame.buf
   self.apply()

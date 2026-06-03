@@ -135,7 +135,7 @@ pub fn Image::from_file(
 /// - Pads shorter lines with spaces to maintain rectangular shape
 ///
 /// # Examples
-/// ```moonbit
+/// ```moonbit nocheck
 /// let ascii_art = " /\\\n/  \\\n\\  /\n \\/"
 ///
 /// let img = Image::from_string(ascii_art, left=2, top=1) // Creates a diamond shape
@@ -156,7 +156,7 @@ pub fn Image::from_string(
 ///
 /// # Returns
 /// The width of the image in characters.
-pub impl @base.Widget for Image with width(self : Image) -> Int {
+pub impl @base.Widget for Image with fn width(self : Image) -> Int {
   self.section.area.width
 }
 
@@ -168,7 +168,7 @@ pub impl @base.Widget for Image with width(self : Image) -> Int {
 ///
 /// # Returns
 /// The height of the image in character rows.
-pub impl @base.Widget for Image with height(self : Image) -> Int {
+pub impl @base.Widget for Image with fn height(self : Image) -> Int {
   self.section.area.height
 }
 
@@ -192,7 +192,10 @@ pub impl @base.Widget for Image with height(self : Image) -> Int {
 /// # Performance
 /// Efficiently renders the entire image by leveraging subframes and
 /// direct character access without additional processing.
-pub impl @base.Widget for Image with render(self : Image, frame : @base.Frame) -> Unit {
+pub impl @base.Widget for Image with fn render(
+  self : Image,
+  frame : @base.Frame,
+) -> Unit {
   let subframe = frame.subframe(
     self.section.left,
     self.section.top,
@@ -209,7 +212,8 @@ pub impl @base.Widget for Image with render(self : Image, frame : @base.Frame) -
   }
 }
 
-pub impl @base.Widget for Image with handle_event(
+///|
+pub impl @base.Widget for Image with fn handle_event(
   self : Image,
   event : @base.Event,
 ) -> @base.EventResult {

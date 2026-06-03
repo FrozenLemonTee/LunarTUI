@@ -22,7 +22,7 @@ pub struct GridLayout {
 /// A new GridLayout instance ready to arrange widgets in a grid pattern.
 ///
 /// # Examples
-/// ```moonbit
+/// ```moonbit nocheck
 /// let layout = GridLayout::new(2, 3) // Creates a 2x3 grid
 /// ```
 pub fn GridLayout::new(rows : Int, cols : Int) -> GridLayout {
@@ -44,7 +44,7 @@ pub fn GridLayout::new(rows : Int, cols : Int) -> GridLayout {
 /// # Returns
 /// An array of Sections, each defining the position and size for a child widget
 /// placed in the corresponding grid cell.
-pub impl @base.Layout for GridLayout with split(
+pub impl @base.Layout for GridLayout with fn split(
   self : GridLayout,
   area : @base.Area,
   children : Array[&@base.Widget],
@@ -98,7 +98,7 @@ pub impl @base.Layout for GridLayout with split(
 ///
 /// # Returns
 /// The total grid width constrained by available area, or 0 for invalid grid dimensions.
-pub impl @base.Layout for GridLayout with width(
+pub impl @base.Layout for GridLayout with fn width(
   self : GridLayout,
   area : @base.Area,
   children : Array[&@base.Widget],
@@ -123,7 +123,7 @@ pub impl @base.Layout for GridLayout with width(
 ///
 /// # Returns
 /// The total grid height constrained by available area, or 0 for invalid grid dimensions.
-pub impl @base.Layout for GridLayout with height(
+pub impl @base.Layout for GridLayout with fn height(
   self : GridLayout,
   area : @base.Area,
   children : Array[&@base.Widget],

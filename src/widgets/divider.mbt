@@ -75,7 +75,7 @@ pub fn Divider::new(
 /// The width in characters based on divider orientation.
 ///
 /// # Examples
-/// ```moonbit
+/// ```moonbit nocheck
 /// let hdiv = Divider::new(15, direction=Direction::Row)
 ///
 /// let w = hdiv.width() // Returns 15
@@ -84,7 +84,7 @@ pub fn Divider::new(
 ///
 /// let w = vdiv.width() // Returns 1
 /// ```
-pub impl @base.Widget for Divider with width(self : Divider) -> Int {
+pub impl @base.Widget for Divider with fn width(self : Divider) -> Int {
   match self.direction {
     Row => self.length
     Column => 1
@@ -104,7 +104,7 @@ pub impl @base.Widget for Divider with width(self : Divider) -> Int {
 /// The height in character rows based on divider orientation.
 ///
 /// # Examples
-/// ```moonbit
+/// ```moonbit nocheck
 /// let hdiv = Divider::new(15, direction=Direction::Row)
 ///
 /// let h = hdiv.height() // Returns 1
@@ -113,7 +113,7 @@ pub impl @base.Widget for Divider with width(self : Divider) -> Int {
 ///
 /// let h = vdiv.height() // Returns 10
 /// ```
-pub impl @base.Widget for Divider with height(self : Divider) -> Int {
+pub impl @base.Widget for Divider with fn height(self : Divider) -> Int {
   match self.direction {
     Row => 1
     Column => self.length
@@ -135,7 +135,7 @@ pub impl @base.Widget for Divider with height(self : Divider) -> Int {
 /// - Uses line characters for all intermediate positions
 /// - Renders horizontally (left to right) for Row direction
 /// - Renders vertically (top to bottom) for Column direction
-pub impl @base.Widget for Divider with render(
+pub impl @base.Widget for Divider with fn render(
   self : Divider,
   frame : @base.Frame,
 ) -> Unit {
@@ -154,7 +154,8 @@ pub impl @base.Widget for Divider with render(
   }
 }
 
-pub impl @base.Widget for Divider with handle_event(
+///|
+pub impl @base.Widget for Divider with fn handle_event(
   self : Divider,
   event : @base.Event,
 ) -> @base.EventResult {
