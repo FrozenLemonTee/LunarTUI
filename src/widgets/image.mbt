@@ -208,3 +208,10 @@ pub impl @base.Widget for Image with render(self : Image, frame : @base.Frame) -
     }
   }
 }
+
+pub impl @base.Widget for Image with handle_event(
+  self : Image,
+  event : @base.Event,
+) -> @base.EventResult {
+  @base.EventResult::Ignored
+}

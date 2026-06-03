@@ -98,3 +98,10 @@ pub impl @base.Widget for Label with render(self : Label, frame : @base.Frame) -
     subframe.set_chars(i, 0, ch)
   }
 }
+
+pub impl @base.Widget for Label with handle_event(
+  self : Label,
+  event : @base.Event,
+) -> @base.EventResult {
+  @base.EventResult::Ignored
+}

@@ -235,3 +235,10 @@ pub impl @base.Widget for Paragraph with render(
     self.draw_line(frame_line, start, end)
   }
 }
+
+pub impl @base.Widget for Paragraph with handle_event(
+  self : Paragraph,
+  event : @base.Event,
+) -> @base.EventResult {
+  @base.EventResult::Ignored
+}

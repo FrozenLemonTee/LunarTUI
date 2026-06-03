@@ -38,6 +38,20 @@ void terminal_clear() {
 }
 
 /**
+ * @brief Hides the terminal's hardware cursor.
+ */
+void terminal_hide_cursor() {
+    printf("\033[?25l");
+}
+
+/**
+ * @brief Shows the terminal's hardware cursor.
+ */
+void terminal_show_cursor() {
+    printf("\033[?25h");
+}
+
+/**
  * @brief Outputs a single Unicode code point as UTF-8 to the terminal
  * 
  * @details This function takes a Unicode code point and encodes it as UTF-8 for output
