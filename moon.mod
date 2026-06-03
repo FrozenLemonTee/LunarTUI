@@ -1,6 +1,6 @@
 name = "FrozenLemonTee/LunarTUI"
 
-version = "0.0.1"
+version = "0.0.2"
 
 import {
   "moonbitlang/x@0.4.40",
