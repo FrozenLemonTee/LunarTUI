@@ -352,19 +352,19 @@ pub struct CustomWidget {
 }
 
 ///|
-pub impl @base.Widget for CustomWidget with width(self : CustomWidget) -> Int {
+pub impl @base.Widget for CustomWidget with fn width(self : CustomWidget) -> Int {
   // 返回宽度
   ...
 }
 
 ///|
-pub impl @base.Widget for CustomWidget with height(self : CustomWidget) -> Int {
+pub impl @base.Widget for CustomWidget with fn height(self : CustomWidget) -> Int {
   // 返回高度
   ...
 }
 
 ///|
-pub impl @base.Widget for CustomWidget with render(
+pub impl @base.Widget for CustomWidget with fn render(
   self : CustomWidget,
   frame : @base.Frame,
 ) -> Unit {
@@ -381,7 +381,7 @@ pub impl @base.Widget for CustomWidget with render(
 pub struct CustomLayout {}
 
 ///|
-pub impl @base.Layout for CustomLayout with split(
+pub impl @base.Layout for CustomLayout with fn split(
   self : CustomLayout,
   area : @base.Area,
   children : Array[&@base.Widget],
@@ -391,7 +391,7 @@ pub impl @base.Layout for CustomLayout with split(
 }
 
 ///|
-pub impl @base.Layout for CustomLayout with width(
+pub impl @base.Layout for CustomLayout with fn width(
   self : CustomLayout,
   area : @base.Area,
   children : Array[&@base.Widget],
@@ -400,7 +400,7 @@ pub impl @base.Layout for CustomLayout with width(
 }
 
 ///|
-pub impl @base.Layout for CustomLayout with height(
+pub impl @base.Layout for CustomLayout with fn height(
   self : CustomLayout,
   area : @base.Area,
   children : Array[&@base.Widget],
@@ -426,9 +426,9 @@ pub impl @base.Layout for CustomLayout with height(
 ```moonbit nocheck
 ///|
 pub(open) trait Widget {
-  width(self : Self) -> Int
-  height(self : Self) -> Int
-  render(self : Self, frame : @base.Frame) -> Unit
+  fn width(self : Self) -> Int
+  fn height(self : Self) -> Int
+  fn render(self : Self, frame : @base.Frame) -> Unit
 }
 ```
 
@@ -436,11 +436,11 @@ pub(open) trait Widget {
 ```moonbit nocheck
 ///|
 pub(open) trait Layout {
-  split(self : Self, area : @base.Area, children : Array[&Widget]) -> Array[
+  fn split(self : Self, area : @base.Area, children : Array[&Widget]) -> Array[
     @base.Section,
   ]
-  width(self : Self, area : @base.Area, children : Array[&Widget]) -> Int
-  height(self : Self, area : @base.Area, children : Array[&Widget]) -> Int
+  fn width(self : Self, area : @base.Area, children : Array[&Widget]) -> Int
+  fn height(self : Self, area : @base.Area, children : Array[&Widget]) -> Int
 }
 ```
 
