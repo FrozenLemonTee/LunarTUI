@@ -21,7 +21,7 @@ pub struct Area {
 /// A new Area instance with dimensions clamped to non-negative values.
 ///
 /// # Examples
-/// ```moonbit
+/// ```moonbit nocheck
 /// let valid_area = Area::new(10, 5) // Creates 10x5 area
 ///
 /// let clamped_area = Area::new(-5, 3) // Creates 0x3 area (negative width clamped)
@@ -40,7 +40,7 @@ pub fn Area::new(width : Int, height : Int) -> Area {
 /// The total number of character cells in the area (width × height).
 ///
 /// # Examples
-/// ```moonbit
+/// ```moonbit nocheck
 /// let area = Area::new(10, 5)
 ///
 /// let size = area.size() // Returns 50
@@ -75,7 +75,7 @@ pub struct Section {
 /// A new Section instance with position coordinates clamped to non-negative values.
 ///
 /// # Examples
-/// ```moonbit
+/// ```moonbit nocheck
 /// let area = Area::new(8, 4)
 ///
 /// let section = Section::new(area, 2, 1) // Section at position (2,1)

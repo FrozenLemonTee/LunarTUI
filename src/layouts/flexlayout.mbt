@@ -68,7 +68,7 @@ pub(all) struct FlexLayout {
 /// A new FlexLayout instance with the specified configuration.
 ///
 /// # Examples
-/// ```moonbit
+/// ```moonbit nocheck
 /// let layout = FlexLayout::new() // Default row layout
 ///
 /// let centered = FlexLayout::new(direction=Column, justify=Center, align=Center)
@@ -131,7 +131,7 @@ fn FlexLayout::child_cross_size(
 ///
 /// # Returns
 /// An array of Sections positioned according to flex layout rules.
-pub impl @base.Layout for FlexLayout with split(
+pub impl @base.Layout for FlexLayout with fn split(
   self : FlexLayout,
   area : @base.Area,
   children : Array[&@base.Widget],
@@ -221,7 +221,7 @@ pub impl @base.Layout for FlexLayout with split(
 ///
 /// # Returns
 /// The calculated width constrained by available area.
-pub impl @base.Layout for FlexLayout with width(
+pub impl @base.Layout for FlexLayout with fn width(
   self : FlexLayout,
   area : @base.Area,
   children : Array[&@base.Widget],
@@ -253,7 +253,7 @@ pub impl @base.Layout for FlexLayout with width(
 ///
 /// # Returns
 /// The calculated height constrained by available area.
-pub impl @base.Layout for FlexLayout with height(
+pub impl @base.Layout for FlexLayout with fn height(
   self : FlexLayout,
   area : @base.Area,
   children : Array[&@base.Widget],

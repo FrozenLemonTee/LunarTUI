@@ -1,0 +1,10 @@
+import {
+  "FrozenLemonTee/LunarTUI/src/base",
+}
+
+supported_targets = "native"
+
+options(
+  link: { "native": { "cc": "clang" } },
+  "native-stub": [ "terminal.c" ],
+)

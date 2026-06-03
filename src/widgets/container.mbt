@@ -91,7 +91,7 @@ pub fn Container::add_all(
 ///
 /// # Returns
 /// The preferred width in characters based on layout strategy.
-pub impl @base.Widget for Container with width(self : Container) -> Int {
+pub impl @base.Widget for Container with fn width(self : Container) -> Int {
   match self.layout {
     Some(layout) => layout.width(self.section.area, self.children)
     None => self.section.area.width
@@ -109,7 +109,7 @@ pub impl @base.Widget for Container with width(self : Container) -> Int {
 ///
 /// # Returns
 /// The preferred height in character rows based on layout strategy.
-pub impl @base.Widget for Container with height(self : Container) -> Int {
+pub impl @base.Widget for Container with fn height(self : Container) -> Int {
   match self.layout {
     Some(layout) => layout.height(self.section.area, self.children)
     None => self.section.area.height
@@ -137,7 +137,7 @@ pub impl @base.Widget for Container with height(self : Container) -> Int {
 /// 1. Each child is rendered directly into the parent frame
 /// 2. Children use their own position coordinates
 /// 3. No automatic arrangement is performed
-pub impl @base.Widget for Container with render(
+pub impl @base.Widget for Container with fn render(
   self : Container,
   frame : @base.Frame,
 ) -> Unit {
@@ -166,7 +166,8 @@ pub impl @base.Widget for Container with render(
   }
 }
 
-pub impl @base.Widget for Container with handle_event(
+///|
+pub impl @base.Widget for Container with fn handle_event(
   self : Container,
   event : @base.Event,
 ) -> @base.EventResult {

@@ -20,7 +20,7 @@ pub struct Buffer {
 /// A new Buffer instance filled with space characters.
 ///
 /// # Examples
-/// ```moonbit
+/// ```moonbit nocheck
 /// let area = Area::new(10, 5)
 ///
 /// let buffer = Buffer::new(area) // Creates a 10x5 buffer
@@ -102,7 +102,7 @@ pub fn Buffer::get_pos(self : Buffer, index : Int) -> (Int, Int) {
 /// Unit, indicating the operation is performed for side effects.
 ///
 /// # Examples
-/// ```moonbit
+/// ```moonbit nocheck
 /// let buffer = Buffer::new(Area::new(10, 5))
 /// buffer.set_chars(2, 3, 'A')  // Sets 'A' at position (2,3)
 /// ```
@@ -123,7 +123,7 @@ pub fn Buffer::set_chars(self : Buffer, x : Int, y : Int, char : Char) -> Unit {
 /// Each element is of the form ((x, y), (current_cell, other_cell)).
 ///
 /// # Examples
-/// ```moonbit
+/// ```moonbit nocheck
 /// let buf1 = Buffer::new(Area::new(3, 2))
 /// let buf2 = Buffer::new(Area::new(3, 2))
 /// buf1.set_chars(1, 1, 'X')

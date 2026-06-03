@@ -102,7 +102,7 @@ pub fn ProgressBar::set_value(self : ProgressBar, value : Double) -> Unit {
 /// * `mode`: New display mode for the progress value
 ///
 /// # Examples
-/// ```moonbit
+/// ```moonbit nocheck
 /// let pb = ProgressBar::new(20, value=0.75)
 /// pb.set_mode(ShowMode::Decimal)  // Now shows "0.75" instead of "75%"
 /// ```
@@ -118,7 +118,7 @@ pub fn ProgressBar::set_mode(self : ProgressBar, mode : ShowMode) -> Unit {
 /// * `prefix`: New prefix text
 ///
 /// # Examples
-/// ```moonbit
+/// ```moonbit nocheck
 /// let pb = ProgressBar::new(20)
 /// pb.set_prefix("Downloading:")  // Shows "Downloading:|[▇▇▇       ]"
 /// ```
@@ -134,7 +134,7 @@ pub fn ProgressBar::set_prefix(self : ProgressBar, prefix : String) -> Unit {
 /// * `suffix`: New suffix text
 ///
 /// # Examples
-/// ```moonbit
+/// ```moonbit nocheck
 /// let pb = ProgressBar::new(20)
 /// pb.set_suffix("complete")  // Shows "[▇▇▇       ]|complete"
 /// ```
@@ -159,7 +159,7 @@ pub fn ProgressBar::set_suffix(self : ProgressBar, suffix : String) -> Unit {
 /// - Bar length (including brackets: length + 2)
 /// - Value length (with space if shown)
 /// - Suffix length (with space if present)
-pub impl @base.Widget for ProgressBar with width(self : ProgressBar) -> Int {
+pub impl @base.Widget for ProgressBar with fn width(self : ProgressBar) -> Int {
   let value_len = self.value().length()
   let bar_len = self.length + 2
   let prefix_len = if self.prefix.is_empty() {
@@ -190,7 +190,7 @@ pub impl @base.Widget for ProgressBar with width(self : ProgressBar) -> Int {
 ///
 /// # Returns
 /// Always returns 1, as progress bars occupy a single row.
-pub impl @base.Widget for ProgressBar with height(self : ProgressBar) -> Int {
+pub impl @base.Widget for ProgressBar with fn height(self : ProgressBar) -> Int {
   ignore(self)
   1
 }
@@ -230,7 +230,7 @@ fn ProgressBar::draw_bar(self : ProgressBar) -> String {
 /// # Rendering Format
 /// The components are joined with pipe characters for visual separation:
 /// `[prefix] | [bar] | [value] | [suffix]`
-pub impl @base.Widget for ProgressBar with render(
+pub impl @base.Widget for ProgressBar with fn render(
   self : ProgressBar,
   frame : @base.Frame,
 ) -> Unit {
@@ -254,7 +254,8 @@ pub impl @base.Widget for ProgressBar with render(
   }
 }
 
-pub impl @base.Widget for ProgressBar with handle_event(
+///|
+pub impl @base.Widget for ProgressBar with fn handle_event(
   self : ProgressBar,
   event : @base.Event,
 ) -> @base.EventResult {

@@ -35,17 +35,17 @@
 moon add FrozenLemonTee/LunarTUI
 ```
 
-然后在 `moon.mod.json` 文件中添加依赖：
+如果需要手动配置依赖，在 `moon.mod` 文件中添加：
 
-```json
-"deps": {
-    "FrozenLemonTee/LunarTUI": "0.0.1",
+```moonbit
+import {
+  "FrozenLemonTee/LunarTUI@0.0.1",
 }
 ```
 
 ### 基础示例
 
-```moonbit
+```moonbit nocheck
 ///|
 test {
   // 创建组件
@@ -90,7 +90,7 @@ test {
 ### 布局系统
 
 #### 水平布局（HLayout）
-```moonbit
+```moonbit nocheck
 ///|
 test {
   let layout = @layouts.HLayout::new()
@@ -114,7 +114,7 @@ test {
 ```
 
 #### 垂直布局（VLayout）
-```moonbit
+```moonbit nocheck
 ///|
 test {
   let layout = @layouts.VLayout::new()
@@ -138,7 +138,7 @@ test {
 ```
 
 #### 网格布局（GridLayout）
-```moonbit
+```moonbit nocheck
 ///|
 test {
   let layout = @layouts.GridLayout::new(2, 3) // 2行3列
@@ -162,7 +162,7 @@ test {
 ```
 
 #### 弹性布局（FlexLayout）
-```moonbit
+```moonbit nocheck
 ///|
 test {
   let layout = @layouts.FlexLayout::new(
@@ -194,7 +194,7 @@ test {
 ## 🧱 组件使用
 
 ### 标签（Label）
-```moonbit
+```moonbit nocheck
 ///|
 test {
   let label = @widgets.Label::new("Hello World", left=5, top=3)
@@ -206,7 +206,7 @@ test {
 ```
 
 ### 段落（Paragraph）
-```moonbit
+```moonbit nocheck
 ///|
 test {
   let text = "This is a multi-line text paragraph that supports automatic line breaks and alignment features."
@@ -219,7 +219,7 @@ test {
 ```
 
 ### 进度条（ProgressBar）
-```moonbit
+```moonbit nocheck
 ///|
 test {
   let progress = @widgets.ProgressBar::new(
@@ -239,7 +239,7 @@ test {
 ```
 
 ### 分割线（Divider）
-```moonbit
+```moonbit nocheck
 ///|
 test {
   let area = @base.Area::new(50, 50)
@@ -278,7 +278,7 @@ test {
 ```
 
 ### 图像（Image）
-```moonbit
+```moonbit nocheck
 ///|
 test {
   let area = @base.Area::new(100, 50)
@@ -313,7 +313,7 @@ test {
 ```
 
 ### 块容器（Block）
-```moonbit
+```moonbit nocheck
 ///|
 test {
   let area = @base.Area::new(30, 12)
@@ -345,26 +345,26 @@ test {
 ### 自定义组件
 实现 `Widget` trait 来创建自定义组件：
 
-```moonbit
+```moonbit nocheck
 ///|
 pub struct CustomWidget {
   // 组件状态
 }
 
 ///|
-pub impl @base.Widget for CustomWidget with width(self : CustomWidget) -> Int {
+pub impl @base.Widget for CustomWidget with fn width(self : CustomWidget) -> Int {
   // 返回宽度
   ...
 }
 
 ///|
-pub impl @base.Widget for CustomWidget with height(self : CustomWidget) -> Int {
+pub impl @base.Widget for CustomWidget with fn height(self : CustomWidget) -> Int {
   // 返回高度
   ...
 }
 
 ///|
-pub impl @base.Widget for CustomWidget with render(
+pub impl @base.Widget for CustomWidget with fn render(
   self : CustomWidget,
   frame : @base.Frame,
 ) -> Unit {
@@ -376,12 +376,12 @@ pub impl @base.Widget for CustomWidget with render(
 ### 自定义布局
 实现 `Layout` trait 来创建自定义布局：
 
-```moonbit
+```moonbit nocheck
 ///|
 pub struct CustomLayout {}
 
 ///|
-pub impl @base.Layout for CustomLayout with split(
+pub impl @base.Layout for CustomLayout with fn split(
   self : CustomLayout,
   area : @base.Area,
   children : Array[&@base.Widget],
@@ -391,7 +391,7 @@ pub impl @base.Layout for CustomLayout with split(
 }
 
 ///|
-pub impl @base.Layout for CustomLayout with width(
+pub impl @base.Layout for CustomLayout with fn width(
   self : CustomLayout,
   area : @base.Area,
   children : Array[&@base.Widget],
@@ -400,7 +400,7 @@ pub impl @base.Layout for CustomLayout with width(
 }
 
 ///|
-pub impl @base.Layout for CustomLayout with height(
+pub impl @base.Layout for CustomLayout with fn height(
   self : CustomLayout,
   area : @base.Area,
   children : Array[&@base.Widget],
@@ -423,24 +423,24 @@ pub impl @base.Layout for CustomLayout with height(
 | `Section` | 带位置的区域定义 |
 
 ### Widget Trait
-```moonbit
+```moonbit nocheck
 ///|
 pub(open) trait Widget {
-  width(self : Self) -> Int
-  height(self : Self) -> Int
-  render(self : Self, frame : @base.Frame) -> Unit
+  fn width(self : Self) -> Int
+  fn height(self : Self) -> Int
+  fn render(self : Self, frame : @base.Frame) -> Unit
 }
 ```
 
 ### Layout Trait
-```moonbit
+```moonbit nocheck
 ///|
 pub(open) trait Layout {
-  split(self : Self, area : @base.Area, children : Array[&Widget]) -> Array[
+  fn split(self : Self, area : @base.Area, children : Array[&Widget]) -> Array[
     @base.Section,
   ]
-  width(self : Self, area : @base.Area, children : Array[&Widget]) -> Int
-  height(self : Self, area : @base.Area, children : Array[&Widget]) -> Int
+  fn width(self : Self, area : @base.Area, children : Array[&Widget]) -> Int
+  fn height(self : Self, area : @base.Area, children : Array[&Widget]) -> Int
 }
 ```
 

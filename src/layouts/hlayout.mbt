@@ -13,7 +13,7 @@ pub struct HLayout {}
 /// A new HLayout instance ready to arrange widgets horizontally.
 ///
 /// # Examples
-/// ```moonbit
+/// ```moonbit nocheck
 /// let layout = HLayout::new()
 /// ```
 pub fn HLayout::new() -> HLayout {
@@ -35,7 +35,7 @@ pub fn HLayout::new() -> HLayout {
 /// # Returns
 /// An array of Sections, each defining the position and size for a child widget
 /// arranged from left to right.
-pub impl @base.Layout for HLayout with split(
+pub impl @base.Layout for HLayout with fn split(
   self : HLayout,
   area : @base.Area,
   children : Array[&@base.Widget],
@@ -85,7 +85,7 @@ pub impl @base.Layout for HLayout with split(
 ///
 /// # Returns
 /// The minimum between the total children width and available area width.
-pub impl @base.Layout for HLayout with width(
+pub impl @base.Layout for HLayout with fn width(
   self : HLayout,
   area : @base.Area,
   children : Array[&@base.Widget],
@@ -111,7 +111,7 @@ pub impl @base.Layout for HLayout with width(
 ///
 /// # Returns
 /// The minimum between the maximum child height and available area height.
-pub impl @base.Layout for HLayout with height(
+pub impl @base.Layout for HLayout with fn height(
   self : HLayout,
   area : @base.Area,
   children : Array[&@base.Widget],

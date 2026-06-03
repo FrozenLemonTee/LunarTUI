@@ -1,0 +1,20 @@
+name = "FrozenLemonTee/LunarTUI"
+
+version = "0.0.1"
+
+import {
+  "moonbitlang/x@0.4.40",
+  "Kaida-Amethyst/path@0.1.1",
+}
+
+readme = "README.md"
+
+repository = "https://github.com/FrozenLemonTee/LunarTUI"
+
+license = "Apache-2.0"
+
+keywords = [ "cli", "tui", "ui", "terminal", "moonbit" ]
+
+description = "A TUIs package written in MoonBit"
+
+preferred_target = "native"
