@@ -35,11 +35,11 @@
 moon add FrozenLemonTee/LunarTUI
 ```
 
-然后在 `moon.mod.json` 文件中添加依赖：
+如果需要手动配置依赖，在 `moon.mod` 文件中添加：
 
-```json
-"deps": {
-    "FrozenLemonTee/LunarTUI": "0.0.1",
+```moonbit
+import {
+  "FrozenLemonTee/LunarTUI@0.0.1",
 }
 ```
 
