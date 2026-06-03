@@ -1,7 +1,0 @@
-{
-    "import" : [
-        "FrozenLemonTee/LunarTUI/src/base",
-        "moonbitlang/x/fs",
-        "moonbitlang/core/cmp"
-    ]
-}

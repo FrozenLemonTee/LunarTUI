@@ -1,0 +1,10 @@
+import {
+  "FrozenLemonTee/LunarTUI/src/base",
+  "FrozenLemonTee/LunarTUI/src/widgets",
+  "FrozenLemonTee/LunarTUI/src/layouts",
+  "FrozenLemonTee/LunarTUI/src/terminal",
+  "Kaida-Amethyst/path",
+  "moonbitlang/core/env",
+}
+
+supported_targets = "native"
